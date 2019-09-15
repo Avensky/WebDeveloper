@@ -1,0 +1,193 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<nav class="nav-bar" id="navbar">
+	<ul class="#" id="nav-row">
+		<li class="nav-btn"><a href="#welcome-section">About</a></li>
+		<li class="nav-btn"><a href="#projects">Work</a></li>
+		<li class="nav-btn"><a href="#contact">Contact</a></li>
+	</ul>	
+</nav>
+
+
+<div class="#" id="welcome-section">
+	<h1>Hello World, I'm Uriel.</h1>
+	<h5>Web Developer</h5>
+</div>
+
+
+<div class="container" id="projects">
+
+	<h2>These are some of my Projects.</h2>
+
+	
+	<a href="http://urielzacarias.com/" class="project-tile">
+		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
+		<h5>Tribute Page</h5>
+	</a>
+	
+	<a href="#" class="project-tile">
+		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
+		<h5>Tribute Page</h5>
+	</a>
+	
+	<a href="#" class="project-tile">
+		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
+		<h5>Tribute Page</h5>
+	</a>
+	
+	<a href="#" class="project-tile">
+		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
+		<h5>Tribute Page</h5>
+	</a>
+	
+	<a href="#" class="project-tile">
+		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
+	  	<h5>Tribute Page</h5>
+	</a>
+	
+	<a href="#" class="project-tile">
+		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
+		<h5>Tribute Page</h5>
+	</a>
+	
+</div>
+
+<div class="container">
+	<button type="button" class="btn">
+		Show All
+	</button>
+</div>
+	
+
+<div id="contact">
+	<header>
+		<h2>Let's Work Together </h2>
+		<h6>How do you take your coffee?</h6>
+	</header>
+	
+	<a class="ctn">Facebook</a>
+	<a href="https://github.com/Avensky" class="ctn" id="profile-link" target="_blank">GitHub</a>
+	<a class="ctn">Twitter</a>
+	<a class="ctn">Email</a>
+	<a class="ctn">Call</a>
+
+</div>
+
+<div id="footer">
+	<h5>**This is just a fake.. ALl the projects and contact deail given are not real..</h5>
+	
+	<h5>Created for FreeCodeCamp</h5>	
+</div>
+
+	<div class="row top-menu">
+		<div class="col-md-10"></div>
+		<div class="col-md-2 text-right">
+			<a href="{{url_for('showLogin')}}">Click Here to Log in </a>
+		</div>
+	</div>
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<h1>Vegan Dining - California</h1>
+		</div>
+	</div>
+
+	<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+
+
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	{% for city in cities %}
+		<a href = "{{url_for('showRestaurants', city_id = city.id)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10 restaurant-list">
+						<h3>{{city.name}}</h3>
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</a>
+	{% endfor %}
+	
+	
+
+	<div class="row top-menu">
+		<div class="col-md-10"></div>
+		<div class="col-md-2 text-right"></div>
+	</div>
+
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<h1>Vegan Dining - California</h1>
+		</div>
+	</div>
+
+	<div class = 'flash'>
+	{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li><strong> {{ message }} </strong></li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
+
+</div>
+
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+			<a href="{{url_for('newCity')}}">
+				<button class="btn btn-default" id="new-restaurant">
+					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>Add City
+				</button>
+			</a>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	{% for city in cities %}
+		<a href = "{{url_for('showRestaurants', city_id = city.id)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10 restaurant-list">
+						<h3>{{city.name}}</h3>
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</a>
+	{% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+{% endblock %}
