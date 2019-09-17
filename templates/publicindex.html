@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
+
 <nav class="nav-bar" id="navbar">
 	<ul class="#" id="nav-row">
 		<li class="nav-btn"><a href="#welcome-section">About</a></li>
@@ -8,49 +9,36 @@
 		<li class="nav-btn"><a href="#contact">Contact</a></li>
 	</ul>	
 </nav>
-
-
 <div class="#" id="welcome-section">
 	<h1>Hello World, I'm Uriel.</h1>
 	<h5>Web Developer</h5>
 </div>
-
-
 <div class="container" id="projects">
-
 	<h2>These are some of my Projects.</h2>
-
-	
 	<a href="http://urielzacarias.com/" class="project-tile">
 		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
 		<h5>Tribute Page</h5>
 	</a>
-	
 	<a href="#" class="project-tile">
 		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
 		<h5>Tribute Page</h5>
 	</a>
-	
 	<a href="#" class="project-tile">
 		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
 		<h5>Tribute Page</h5>
 	</a>
-	
 	<a href="#" class="project-tile">
 		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
 		<h5>Tribute Page</h5>
 	</a>
-	
 	<a href="#" class="project-tile">
 		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
 	  	<h5>Tribute Page</h5>
 	</a>
-	
 	<a href="#" class="project-tile">
 		<img class="img" src="http://urielzacarias.com/img/slide2.jpg">
 		<h5>Tribute Page</h5>
 	</a>
-	
 </div>
 
 <div class="container">
@@ -96,9 +84,9 @@
 		</div>
 	</div>
 
-	<div class = 'flash'>
-		      {% with messages = get_flashed_messages() %}
-      {% if messages %}
+	<div class = "flash">
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
 
         <ul>
         {% for message in messages %}
@@ -106,11 +94,8 @@
         {% endfor %}
         </ul>
         {% endif %}
-    {% endwith %}
-
-</div>
-
-
+    	{% endwith %}
+    </div>
 
 	<div class="row padding-top padding-bottom">
 		<div class="col-md-1"></div>
@@ -149,7 +134,7 @@
 		</div>
 	</div>
 
-	<div class = 'flash'>
+	<div class = "flash">
 	{% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul>

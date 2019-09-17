@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect, jsonify, url_for
-from flask import flash
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, City, RestaurantItem, User
@@ -20,7 +19,7 @@ with app.open_resource('client_secrets.json') as f:
 
 #CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
 #	'web']['client_id']
-APPLICATION_NAME = "Vegan Dining"
+APPLICATION_NAME = " "
 
 # Connect to Database and create database session
 engine = create_engine('postgresql://catalog:password@localhost/catalog')
@@ -308,6 +307,30 @@ def restaurantItemJSON(city_id, restaurant_id):
 def citiesJSON():
     cities = session.query(City).all()
     return jsonify(cities=[c.serialize for c in cities])
+##############################################################################
+##############################################################################
+# Show all cities
+##############################################################################
+##############################################################################
+@app.route('/')
+@app.route('/index/')
+def showIndex():
+	return render_template('index.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##############################################################################
 ##############################################################################
