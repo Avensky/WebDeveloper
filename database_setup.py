@@ -60,6 +60,6 @@ class RestaurantItem(Base):
         }
 
 
-engine = create_engine('postgresql://catalog:password@localhost/catalog')
+engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
 
 Base.metadata.create_all(engine)

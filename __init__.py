@@ -22,7 +22,7 @@ with app.open_resource('client_secrets.json') as f:
 APPLICATION_NAME = " "
 
 # Connect to Database and create database session
-engine = create_engine('postgresql://catalog:password@localhost/catalog')
+engine = create_engine('postgresql://developer:86developers@localhost/myDatabase')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
