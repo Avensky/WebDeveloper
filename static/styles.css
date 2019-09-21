@@ -1,27 +1,42 @@
-/* CSS Document */
+/****************************************
+*****************************************
+ CSS Document
+*****************************************
+****************************************/
+body {
+	margin: 0px;
+}
 
 /****************************************
 *****************************************
 Nav-bar
 *****************************************
 ****************************************/
-#nav-row {
+.navbar-container {
+	display: flex;		
+	margin: 0px auto;
 	background-color: lightcyan;
 	color: black;
 	height: 60px;
-	text-align: right;
-	position: fixed;
+	justify-content: flex-end;
+	position:fixed;
 	width: 100%;
 	list-style: none;
-	
+        padding: 0px;
+        flex-wrap:wrap;
 }
 
-nav ul li {
+
+.navbar-child {
 	display: inline-block;
-	padding: 15px;
-	margin: 15px 55px 5px 55px;
-
+	padding: 10px;
+	margin: 15px 55px 5px;
 }
+
+
+
+
+
 
 /****************************************
 *****************************************
@@ -39,39 +54,54 @@ Welcome Section
 	text-align: center;
 }
 
+#click-here {
+	margin-top: 225px;
+}
+
+#click-here h3{
+	padding: 5px;
+	display:inline;
+	border-style:solid;
+	border-width:3px;
+	border-radius: 50px;
+
+}
+
 /****************************************
 *****************************************
-Project title
+flexbox for project section
 *****************************************
 ****************************************/
-
 #projects{
-	text-align: center;
-	
-}
-#projects h2 {
-	margin-top: 60px;
-	
+	padding: 175px 0px;
 }
 
-.project-title{
-	display: inline-block;
-	height: 220px;
-	width: 280px;
-	border: 2px solid lightblue;
-	margin: 40px 100px;
-	text-align: center;
-		
+.project-heading {
+	padding: 0px;
+}
+
+.project-heading h2{
+	text-align:center;
 }
 
 
-img {
-	padding: 15px 10px;
-	width: 280px;
-	height: auto;
-	border-bottom: 2px solid lightblue;
+.project-container{
+	display:flex;
+	padding: 0px 10%;
+	flex-wrap:wrap;
+	min-height:100%;
+	margin: 0px auto;
+	justify-content: center;
 }
 
+.project-child{
+	margin:10px 25px;
+	min-height: 20em;
+	min-width: 20em;
+	border: 2px solid darkblue;
+	border-radius:1em;
+	background-color: lightblue;
+}
 
 
 /****************************************
@@ -181,13 +211,12 @@ h1 {
 }
 
 h2 {
-	font-size: 24px;
+	font-size: 36px;
 	color: #42C3C9;
-	line-height: 29px;
 }
 
 h3 {
-	font-size: 18px;
+	font-size: 24px;
 	color: #4A4A4A;
 	line-height: 23px;
 }
