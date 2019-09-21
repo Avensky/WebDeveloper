@@ -72,15 +72,15 @@ Welcome Section
 flexbox for project section
 *****************************************
 ****************************************/
-#projects{
+.container #projects{
 	padding: 175px 0px;
 }
 
-.project-heading {
+.container-heading {
 	padding: 0px;
 }
 
-.project-heading h2{
+.container-heading h2{
 	text-align:center;
 }
 
@@ -103,6 +103,21 @@ flexbox for project section
 	background-color: lightblue;
 }
 
+/****************************************
+*****************************************
+Blog section
+*****************************************
+****************************************/
+.container #blog{
+	padding: 175px 0px;	
+}
+.blog-container{
+	
+}
+
+.blog-child{
+	
+}
 
 /****************************************
 *****************************************
