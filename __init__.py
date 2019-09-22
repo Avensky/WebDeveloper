@@ -323,6 +323,7 @@ def showIndex():
 # Show Blog Page
 ##############################################################################
 ##############################################################################
+
 @app.route('/blog/')
 def showBlog():
 	return render_template('blog.html')
@@ -343,7 +344,6 @@ def showBlog():
 # Show all cities
 ##############################################################################
 ##############################################################################
-@app.route('/')
 @app.route('/city/')
 def showCities():
     cities = session.query(City).order_by(asc(City.name))
@@ -513,8 +513,8 @@ def deleteRestaurantItem(city_id, restaurant_id):
         render_template(
             'deleterestaurantitem.html', city_id=city_id,
             restaurant_id=restaurant_id, item=iToDelete)
-			
-			
+
+
 ##############################################################################
 ##############################################################################
 # Disconnect based on provider
