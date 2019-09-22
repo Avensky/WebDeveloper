@@ -8,14 +8,20 @@
 	<body>
 		<div class="container">
 			<nav class="navbar-container" id="navbar">
-				<li class="navbat-child"><a href="#" class="box-shadow-menu"></a></li>
-				<li class="navbar-child"><a href="#">About</a></li>
-				<li class="navbar-child"><a href="#">Home</a></li>
-				<li class="navbar-child"><a href="#">Blog</a></li>
-				<li class="navbar-child"><a href="#">Forum</a></li>
-				<li class="navbar-child"><a href="#">Shop</a></li>
-				<li class="navbar-child"><a href="#">Projects></a></li>
-				<li class="navbar-child"><a href="#">Sign In</a></li>
+				<div class="navleft">
+					<li class="navbar-child"><a href="#" class="box-shadow-menu"></a></li>
+					<li class="navbar-child"><a href="#">About</a></li>
+				</div>
+				<div class="navcenter">
+					<li class="navbar-child"><a href="#">Home</a></li>
+				</div>
+				<div>
+					<li class="navbar-child"><a href="#">Blog</a></li>
+					<li class="navbar-child"><a href="#">Forum</a></li>
+					<li class="navbar-child"><a href="#">Shop</a></li>
+					<li class="navbar-child"><a href="#">Projects</a></li>
+					<li class="navbar-child"><a href="#">Sign In</a></li>
+				</div>
 			</nav>
 
 			{% block content %}
