@@ -122,7 +122,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 ** port 2200
 ** Password Authentication no
 * sudo service ssh restart	
-* ssh poly@52.42.100.188 -p 2200
+* ssh poly@54.200.79.28  -p 2200
 * sudo nano /etc/ssh/sshd_config
 ** PermitRootLogin no
 * sudo service ssh restart
@@ -136,21 +136,30 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 
 ## Install dependencies and virtual environment
 
-*	sudo apt-get install python libexpat1 
-*	sudo apt-get install apache2 apache2-utils ssl-cert
+* sudo apt-get install python libexpat1 
+* sudo apt-get install apache2 apache2-utils ssl-cert
  
-*	sudo apt install apache2
-*	sudo apt-get install libapache2-mod-wsgi
+* sudo apt install apache2
+* sudo apt-get install libapache2-mod-wsgi-py3
+
+** sudo apt-get install libapache2-mod-wsgi
+** sudo apt-get remove libapache2-mod-python libapache2-mod-wsgi
+
 *	sudo apt install php libapache2-mod-php
 *	sudo systemctl restart apache2
+
 *	sudo git clone https://github.com/Avensky/WebDeveloper.git /var/www/html/WebDeveloper
 *	sudo apt-get install python3-venv
 *	sudo python3 -m venv venv
 *	source /var/www/html/WebDeveloper/venv/bin/activate
 
-*	sudo apt-get install python-pip
-*	sudo python -m pip install --upgrade pip
-*	sudo python2 -m pip install oauth2client
+* sudo apt-get install python-pip
+* sudo apt install python3-pip
+* sudo pip3 install flask
+* sudo pip3 install Flask-SQLAlchemy
+* sudo apt-get install python3-psycopg2
+* sudo apt install python3-oauth2client
+
 *	sudo python2 -m pip install requests
 *	sudo python2 -m pip install httplib2	
 *	sudo apt-get -qqy install postgresql python-psycopg2
@@ -192,38 +201,41 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 
 
 ## Install and configure postgreSQL database and user
-*	sudo apt-get install postgresql 
-*	sudo apt-get install python-sqlalchemy
-*	Do not allow remote connections
-*		sudo nano /etc/postgresql/9.5/main/pg_hba.conf
-*	sudo su postgres
-*	createuser --interactive --pwprompt
-**		Enter name of role to add: catalog
-**		Enter password for new role:
-**		Enter it again:
-**		Shall the new role be a superuser? (y/n) n
-**		Shall the new role be allowed to create databases? (y/n) y
-**		Shall the new role be allowed to create more new roles? (y/n) n
-**		createdb -O catalog catalog
+* sudo apt-get install postgresql 
+* sudo apt-get install python-sqlalchemy
+* Do not allow remote connections
+* sudo nano /etc/postgresql/9.5/main/pg_hba.conf
+
+* sudo su postgres
+* createuser --interactive --pwprompt
+** Enter name of role to add: developer
+** Enter password for new role: 86developers
+** Enter it again:
+** Shall the new role be a superuser? (y/n) n
+** Shall the new role be allowed to create databases? (y/n) y
+** Shall the new role be allowed to create more new roles? (y/n) n
+** createdb -O develper myDatabase
 *	exit
+* psql postgres
+** DROP USER 
 	
 			
-	sudo nano /var/www/html/WebDeveloper/database_setup.py
-	sudo python database_setup.py
-sudo service apache2 restart
+* sudo nano /var/www/html/WebDeveloper/database_setup.py
+* sudo python database_setup.py
+* sudo service apache2 restart
 
-sudo nano /etc/hosts
-54.200.79.28 avensky.com
+* sudo nano /etc/hosts
+* 54.200.79.28 avensky.com
 
-Configure and install software to enable HTTPS 
-	audo apt-get update
-	sudo apt-get install software-properties-common
-	sudo add-apt-repository universe
-	sudo add-apt-repository ppa:certbot/certbot
-	sudo apt-get update
+## Configure and install software to enable HTTPS 
+* sudo apt-get update
+* sudo apt-get install software-properties-common
+* sudo add-apt-repository universe
+* sudo add-apt-repository ppa:certbot/certbot
+* sudo apt-get update
 
-	sudo apt-get install certbot python-certbot-apache
-	sudo certbot --apache
+* sudo apt-get install certbot python-certbot-apache
+* sudo certbot --apache
 
 	/etc/letsencrypt/live/www.avensky.com/privkey.pem
 	
@@ -236,4 +248,5 @@ Configure and install software to enable HTTPS
 	 
 sudo apachectl -k restart
 sudo tail -n 5 /var/log/apache2/error.log
+sudo nano /var/log/apache2/error.log
 
