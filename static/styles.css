@@ -5,11 +5,14 @@
 ****************************************/
 body {
 	margin: 0px;
+	overflow-x: hidden;
+
 }
 
 * {
 	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
 	font-weight: 700;
+	box-sizing: border-box;
 }
 
 h1 {
@@ -51,28 +54,6 @@ a {
  	line-height: 17px;
 }
 
-.btn {
-	padding: 20px;
-	margin: 0;
-	border-color: #9FB80A;
-	border-width: 2px;
-	color: #9FB80A;;
-}
-
-.btn:hover {
-	border-color: #9FB80A;
-}
-
-.btn.delete {
-	border-color: #aaaaaa;
-	color: #aaaaaa;
-}
-
-.btn.delete:hover {
-	border-color: #aaaaaa;
-	color: red;
-}
-
 .flash {
 	background-color: #98FB98;
 	width:100%;
@@ -83,6 +64,22 @@ a {
 	list-style-type: none;
 	text-align: center;
 }
+
+
+/****************************************
+*****************************************
+Video background
+*****************************************
+****************************************/
+
+.video{
+	max-width: 100vw;
+	display:flex;
+	align-items: center;
+	color:#fff;
+
+}
+
 /****************************************
 *****************************************
 Nav-bar
@@ -158,15 +155,11 @@ Nav-bar
     0 0.5em 0 0 black;
 }
 
-
-
-
 /****************************************
 *****************************************
 Welcome Section
 *****************************************
 ****************************************/
-
 
 #welcome-section {
 	top: 0px;
@@ -187,12 +180,186 @@ Welcome Section
 	border-style:solid;
 	border-width:3px;
 	border-radius: 50px;
-
 }
 
 /****************************************
 *****************************************
-flexbox for project section
+content-wrapper
+*****************************************
+****************************************/
+.header h2{margin:0px;}
+.header h3{margin: 20px 0px;}
+
+.sidebar {grid-area: sidebar;}
+
+.content {
+  grid-area: content;
+  position: relative;
+
+}
+
+.header {
+	padding-top: 75px;
+	border-bottom: solid 2px BLACK;
+  grid-area: header;
+	font-family: 'Fira Sans', sans-serif;
+	line-height: 1.6;
+	display: grid;
+	place-items: center;
+}
+
+
+.footer {
+  grid-area: footer;
+}
+
+.content-wrapper {
+	margin: 0px 15%;
+	padding: 55px 1% 1%;
+	display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 25vw;
+	grid-template-areas:
+    "header  header  header header"
+    "content content content sidebar"
+    "footer  footer  footer footer";
+  background-color: lightgrey;
+  color: #444;
+}
+
+.box {
+  background-color: white;
+  color: #fff;
+  border-radius: 0px;
+  padding: 1%;
+  font-size: 150%;
+}
+
+.header,
+.footer {
+  background-color: #;
+}
+
+.card {
+  // box-shadow: 0 0 20px rgba(0,0,0,.2);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  // background: lightcyan;
+  flex-basis: 250px;
+  color: white;
+  padding: 0em;
+  text-align: center;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 2em;
+  grid-template-areas:
+    "name"
+    "image"
+    "social"
+    "position"
+    "description";
+}
+
+
+.profile-name     { grid-area: name; }
+.profile-position { grid-area: position; }
+.profile-info     { grid-area: description; }
+.profile-img      { grid-area: image; }
+.social-list      { grid-area: social; }
+
+
+
+.profile-info {
+  font-weight: 300;
+  opacity: .7;
+}
+
+.profile-name {
+  grid-area: name;
+  letter-spacing: 1px;
+  font-size: 2rem;
+  margin: .75em 0 0;
+  line-height: 1;
+}
+
+.profile-name::after {
+  content: '';
+  display: block;
+  width: 2em;
+  height: 1px;
+  background: #5bcbf0;
+  margin: .5em auto .65em;
+  opacity: .25;
+}
+
+.profile-position {
+  text-transform: uppercase;
+  font-size: .875rem;
+  letter-spacing: 3px;
+  margin: 0 0 .5vem;
+  line-height: 1;
+  color: #5bcbf0;
+}
+
+.profile-img {
+  justify-self: center;
+  max-width: 100%;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.social-list {
+  justify-self: center;
+  list-style: none;
+  justify-content: space-between;
+  display: flex;
+  width: 75px;
+  margin: .5em 0 0;
+  padding: 0;
+}
+
+.social-link {
+  color: #5bcbf0;
+  opacity: .5;
+}
+
+.social-link:hover,
+.social-link:focus {
+  opacity: 1;
+}
+
+.bio-title {
+  color: #0090D1;
+  font-size: 1.25rem;
+  // font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+}
+
+
+@media (min-width: 600px) {
+  .card {
+    text-align: left;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "image name"
+      "image position"
+      "social description";
+  }
+
+  .profile-name::after {
+    margin-left: 0;
+  }
+}
+
+/****************************************
+*****************************************
+project section
 *****************************************
 ****************************************/
 #projects{
@@ -224,32 +391,17 @@ flexbox for project section
 	border-radius:1em;
 	background-color: lightblue;
 }
-
 /****************************************
 *****************************************
 Blog section
 *****************************************
 ****************************************/
-#blog {
-	display:;
-	padding: 175px 10%;
-	min-height:100%;
-	margin: 0px auto;
-	justify-content: center;
-}
-
-.blog-child{
-
-}
-
-
 
 /****************************************
 *****************************************
 Button
 *****************************************
 ****************************************/
-
 
 .btn {
 	display: block;
@@ -259,17 +411,11 @@ Button
 
 }
 
-
-
-
-
-
 /****************************************
 *****************************************
 Contacts
 *****************************************
 ****************************************/
-
 
 #contact {
 	background-color:aquamarine;
@@ -279,47 +425,12 @@ Contacts
 
 }
 
-
-/****************************************
-*****************************************
-Ctn
-*****************************************
-****************************************/
-
-
-.ctn {
-	background-color: white;
-	border-radius: 100%;
-	border: 2px solid green;
-	width:100px;
-	height:100px;
-	display: inline-block;
-	line-height: 100px;
-	margin:0 35px 45px 35px;
-
-
-}
-
-
-
-/****************************************
-*****************************************
-ctn header
-*****************************************
-****************************************/
-
-header {
-	margin-bottom: 80px;
-
-}
-
-
-
 /****************************************
 *****************************************
 footer
 *****************************************
 ****************************************/
+
 
 #footer {
 	margin: 0px;
@@ -329,68 +440,4 @@ footer
 	padding: 20px;
 	text-align: center;
 
-}
-
-
-/****************************************
-*****************************************
-Blog from yt
-*****************************************
-****************************************/
-/* Header/Blog Title */
-.blog-header {
-  padding: 30px;
-  font-size: 40px;
-  text-align: center;
-  background: white;
-}
-
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {
-  float: left;
-  width: 70%;
-}
-
-/* Right column */
-.rightcolumn {
-  float: left;
-  width: 25%;
-}
-
-/* Fake image */
-.fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
-}
-
-/* Add a card effect for articles */
-.card {
-  background-color: white;
-  padding: 20px;
-  margin-top: 20px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Footer */
-.footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd;
-  margin-top: 20px;
-}
-
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
-  .leftcolumn, .rightcolumn {
-    width: 100%;
-    padding: 0;
-  }
 }

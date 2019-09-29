@@ -1,12 +1,17 @@
 {% extends "main.html" %}
 {% block content %}
-<div class="#" id="welcome-section">
+<div class="video-wrapper"
+	<div class="video-container">
+		<video class="video" src=" {{  url_for('static', filename='vids/intro.mp4')}} " autoplay="true" loop="true">
+	</video>
+</div>
+<div class="welcome-wrapper" id="welcome-section">
 	<h1>Hello World, I'm Uriel Zacarias</h1>
 	<h2>full stack web developer</h2>
 	<div id="click-here"><h3>&#171;click here&#187;</h3></div>
 </div>
 
-<div class="#" id="projects">
+<div class="content-wrapper" id="projects">
 	<div class="heading">
 		<h2>These are some of my Projects.</h2>
 	</div>
