@@ -97,6 +97,7 @@ Nav-bar
 	list-style: none;
   padding: 0px;
   flex-wrap: wrap;
+	z-index: 10000;
 }
 
 .navbox {
