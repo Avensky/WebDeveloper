@@ -160,17 +160,6 @@ Nav-bar
 
 
 
-@media (max-width: 800px) {
-
-	.navcenter {
-		display:#;
-	}
-	.navright {
-		display:none;
-	}
-}
-
-
 
 /****************************************
 *****************************************
@@ -201,91 +190,125 @@ Welcome Section
 
 /****************************************
 *****************************************
-content-wrapper
+grid boxes
 *****************************************
 ****************************************/
-.header h2{margin:0px;}
-.header h3{margin: 20px 0px;}
-
-.sidebar {grid-area: sidebar;}
-
-.content {
-  grid-area: content;
-  position: relative;
-
-}
-
-.header {
-	padding-top: 75px;
-	border-bottom: solid 2px BLACK;
-  grid-area: header;
-	font-family: 'Fira Sans', sans-serif;
-	line-height: 1.6;
-	display: grid;
-	place-items: center;
-}
-
-
-.footer {
-  grid-area: footer;
-}
-
-.content-wrapper {
-	margin: 0px 15%;
-	padding: 55px 1% 1%;
-	display: grid;
-  grid-template-columns: 1fr;
-	grid-column-gap: 2em;
-	grid-template-areas:
-		"header"
-		"content"
-		"sidebar"
-		"footer";
-  background-color: lightgrey;
-  color: #444;
-}
-
-@media (min-width: 600px) {
-  .content-wrapper {
-		margin: 0px 15%;
-		padding: 55px 1% 1%;
-    text-align: left;
-		display: grid;
-		grid-template-columns: 25vw;
-		grid-template-areas:
-		  "header  header  header header"
-		  "content content content sidebar"
-		  "footer  footer  footer footer";
-  }
-
 .box {
   background-color: white;
   color: #fff;
-  border-radius: 0px;
-  padding: 1%;
   font-size: 150%;
 }
 
-.header,
-.footer {
-  background-color: #;
+.card,.side-card {
+	padding:2%;
 }
 
-.card {
-  // box-shadow: 0 0 20px rgba(0,0,0,.2);
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  // background: lightcyan;
-  flex-basis: 250px;
-  color: white;
-  padding: 0em;
-  text-align: center;
+/****************************************
+*****************************************
+grid heading
+*****************************************
+****************************************/
+.header h2{
+	font-size: 3em;
+	margin:0px;
+}
+.header h3{
+	margin: 0px;
+	font-size: 1.5em;
+	line-height: 1.5em;
+}
 
+.header {
+	grid-area: header;
+	padding: 25px 0%;
+	border-bottom: solid 2px BLACK;
+	display: grid;
+}
+
+/****************************************
+*****************************************
+grid content
+*****************************************
+****************************************/
+.content {
+  position: relative;
+}
+
+/****************************************
+*****************************************
+grid footer
+*****************************************
+****************************************/
+
+/************************************************
+*************************************************
+Card grid
+*************************************************
+************************************************/
+
+.content-wrapper {
+	margin: 0 15%;
+	padding:  65px 0px;
+	text-align: left;
+	display: grid;
+	grid-template-columns: 25vw;
+	grid-column-gap: 1em;
+	grid-template-areas:
+		"header  header  header header"
+		"content content content sidebar"
+		"footer  footer  footer footer";
+}
+
+.sidebar	{grid-area: sidebar;}
+.content	{grid-area: content;}
+.header 	{grid-area: header;}
+.footer		{grid-area: footer;}
+
+/****************************************
+*****************************************
+browser window is 600px wide or less
+*****************************************
+****************************************/
+@media (max-width: 600px) {
+
+	.navcenter {
+		display:#;
+	}
+	.navright {
+		display:none;
+	}
+}
+
+@media (max-width: 600px) {
+  .content-wrapper {
+		margin: 0px 15%;
+		padding: 55px 0% 0%;
+		display: grid;
+	  grid-template-columns: 1fr;
+		grid-template-areas:
+			"header"
+			"content"
+			"sidebar"
+			"footer";
+	  color: #444;
+  }
+
+	.profile-img {
+	  justify-self: center;
+	  max-width: 100%;
+
+	}
+}
+/************************************************
+*************************************************
+Card grid
+*************************************************
+************************************************/
+.card {
+  box-shadow: 0 0 20px rgba(0,0,0,.2);
   display: grid;
   grid-template-columns: 1fr;
-  grid-column-gap: 2em;
+  grid-column-gap: 1%;
   grid-template-areas:
     "name"
     "image"
@@ -294,6 +317,11 @@ content-wrapper
     "description";
 }
 
+/************************************************
+*************************************************
+Card grid
+*************************************************
+************************************************/
 
 .profile-name     { grid-area: name; }
 .profile-position { grid-area: position; }
@@ -302,14 +330,39 @@ content-wrapper
 .social-list      { grid-area: social; }
 
 
+/*******************************************
+********************************************
 
+********************************************
+*******************************************/
+
+/* Change card layout to fit small screens*/
+@media (min-width: 600px) {
+  .card {
+    text-align: left;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "image name"
+      "image position"
+      "social description";
+  }
+
+  .profile-name::after {
+    margin-left: 0;
+  }
+}
+
+/************************************************
+*************************************************
+Card css
+*************************************************
+************************************************/
 .profile-info {
   font-weight: 300;
   opacity: .7;
 }
 
 .profile-name {
-  grid-area: name;
   letter-spacing: 1px;
   font-size: 2rem;
   margin: .75em 0 0;
@@ -370,22 +423,6 @@ content-wrapper
   text-transform: uppercase;
   line-height: 1;
   margin: 0;
-}
-
-
-@media (min-width: 600px) {
-  .card {
-    text-align: left;
-    grid-template-columns: 1fr 3fr;
-    grid-template-areas:
-      "image name"
-      "image position"
-      "social description";
-  }
-
-  .profile-name::after {
-    margin-left: 0;
-  }
 }
 
 /****************************************
