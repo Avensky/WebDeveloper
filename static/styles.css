@@ -3,16 +3,11 @@
  CSS Document
 *****************************************
 ****************************************/
-body {
-	margin: 0px;
-	overflow-x: hidden;
-
-}
+body {margin: 0px;}
 
 * {
 	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
 	font-weight: 700;
-	box-sizing: border-box;
 }
 
 h1 {
@@ -24,7 +19,7 @@ h1 {
 }
 
 h2 {
-	font-size: 36px;
+	font-size: 3em;
 	color: #42C3C9;
 }
 
@@ -71,13 +66,13 @@ a {
 Video background
 *****************************************
 ****************************************/
+.video-wrapper {
+}
 
-.video{
-	max-width: 100vw;
-	display:flex;
-	align-items: center;
-	color:#fff;
-
+.video {
+	width: 100%;
+	display: flex;
+	color: #fff;
 }
 
 /****************************************
@@ -89,14 +84,11 @@ Nav-bar
 	display: flex;
 	margin: 0px auto;
 	background-color: lightcyan;
-	color: black;
-	min-height:6%;
-	height: auto;
+	height:6vh;
 	position: fixed;
 	width: 100%;
 	list-style: none;
   padding: 0px;
-  flex-wrap: wrap;
 	z-index: 10000;
 }
 
@@ -109,13 +101,11 @@ Nav-bar
 
 .navleft {
 	justify-content: flex-start;
-	flex-wrap: wrap;
 	padding-left: 50px;
 }
 
 .navright {
 	justify-content: flex-end;
-	flex-wrap: nowrap;
 	padding-right: 50px;
 }
 .navbox:first-child > span {
@@ -128,9 +118,7 @@ Nav-bar
 
 .navbar-item {
 	padding: 10px;
-	text-decoration: none;
 	white-space: nowrap;
-	overflow: hidden;
 }
 
 .navbar-item a {
@@ -152,14 +140,18 @@ Nav-bar
   top: 0.25em;
   width: 1em;
   height: 0.15em;
-  background: black;
+  background: #0093B9;
   box-shadow:
-    0 0.25em 0 0 black,
-    0 0.5em 0 0 black;
+    0 0.25em 0 0 #0093B9,
+    0 0.5em 0 0 #0093B9;
 }
 
-
-
+.box-shadow-menu:before a:hover {
+		background: black;
+		box-shadow:
+			0 0.25em 0 0 black,
+			0 0.5em 0 0 black;
+}
 
 /****************************************
 *****************************************
@@ -171,13 +163,13 @@ Welcome Section
 	top: 0px;
 	min-height: 55vh;
 	padding-top: 45vh;
-	height: 100vh;
+	height: 130vh;
 	background-color: lightcyan;
 	text-align: center;
 }
 
 #click-here {
-	margin-top: 225px;
+	margin-top: 150px;
 }
 
 #click-here h3{
@@ -188,6 +180,9 @@ Welcome Section
 	border-radius: 50px;
 }
 
+#click-here:hover {
+}
+
 /****************************************
 *****************************************
 grid boxes
@@ -196,10 +191,11 @@ grid boxes
 .box {
   background-color: white;
   color: #fff;
-  font-size: 150%;
+
 }
 
 .card,.side-card {
+box-shadow: 0 0 20px rgba(0,0,0,.2);
 	padding:2%;
 }
 
@@ -220,7 +216,8 @@ grid heading
 
 .header {
 	grid-area: header;
-	padding: 25px 0%;
+	padding: 95px 0 15px;
+	margin: 0 0 25px;
 	border-bottom: solid 2px BLACK;
 	display: grid;
 }
@@ -247,8 +244,9 @@ Card grid
 ************************************************/
 
 .content-wrapper {
+	min-height: 130vh;
 	margin: 0 15%;
-	padding:  65px 0px;
+	padding: 0px;
 	text-align: left;
 	display: grid;
 	grid-template-columns: 25vw;
@@ -270,28 +268,20 @@ browser window is 600px wide or less
 *****************************************
 ****************************************/
 @media (max-width: 600px) {
-
-	.navcenter {
-		display:#;
-	}
-	.navright {
-		display:none;
-	}
-}
-
-@media (max-width: 600px) {
-  .content-wrapper {
-		margin: 0px 15%;
-		padding: 55px 0% 0%;
-		display: grid;
-	  grid-template-columns: 1fr;
-		grid-template-areas:
-			"header"
-			"content"
-			"sidebar"
-			"footer";
-	  color: #444;
-  }
+		.navcenter { }
+		.navright {display:none;}
+		.content-wrapper {
+			margin: 0px 15%;
+			padding: 55px 0% 55px;
+			display: grid;
+	  	grid-template-columns: 1fr;
+			grid-template-areas:
+				"header"
+				"content"
+				"sidebar"
+				"footer";
+		  color: #444;
+	  }
 
 	.profile-img {
 	  justify-self: center;
@@ -335,6 +325,7 @@ Card grid
 
 ********************************************
 *******************************************/
+
 
 /* Change card layout to fit small screens*/
 @media (min-width: 600px) {
