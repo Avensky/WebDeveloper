@@ -6,7 +6,7 @@ Server address: 54.200.79.28
 ssh port 2200
 
 Test user login facebook  
-Email: 
+Email:
 Password:  
 
 ## Description
@@ -35,6 +35,7 @@ vegan restaurants. For simplicity it only supports one state at this time.
 * postgresql
 * python-psycopg2
 * python-sqlalchemy
+* pip install flask-wtf
 
 ## Configurations made to server on server providers site
 * Created a static ip
@@ -71,7 +72,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 
 ## Set up Amazon Lightsail instance
 * Select Linux/Unix Ubuntu 18 LTS
-* Go to Networking tab and addn 
+* Go to Networking tab and addn
 **	custom   tcp   2200
 **	custom   tcp   5000
 **	custom   udp   123
@@ -107,10 +108,10 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 
 ## In local environment
 * ssh-keygen
-* c/users/uriel/.ssh/id_rsa: 
+* c/users/uriel/.ssh/id_rsa:
 
 ## ssh to server
-* ssh poly@54.200.79.28 
+* ssh poly@54.200.79.28
 * mkdir .ssh
 * touch .ssh/authorized_keys
 * nano .ssh/authorized_keys
@@ -121,7 +122,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 * sudo nano /etc/ssh/sshd_config
 ** port 2200
 ** Password Authentication no
-* sudo service ssh restart	
+* sudo service ssh restart
 * ssh poly@54.200.79.28  -p 2200
 * sudo nano /etc/ssh/sshd_config
 ** PermitRootLogin no
@@ -136,9 +137,9 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 
 ## Install dependencies and virtual environment
 
-* sudo apt-get install python libexpat1 
+* sudo apt-get install python libexpat1
 * sudo apt-get install apache2 apache2-utils ssl-cert
- 
+
 * sudo apt install apache2
 * sudo apt-get install libapache2-mod-wsgi-py3
 
@@ -161,7 +162,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 * sudo apt install python3-oauth2client
 
 *	sudo python2 -m pip install requests
-*	sudo python2 -m pip install httplib2	
+*	sudo python2 -m pip install httplib2
 *	sudo apt-get -qqy install postgresql python-psycopg2
 
 ## Configure Apache, mod-wsgi
@@ -186,7 +187,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 **			LogLevel warn
 **			CustomLog ${APACHE_LOG_DIR}/access.log combined
 **		</VirtualHost>
-		
+
 * sudo a2ensite WebDeveloper
 * sudo systemctl reload apache2
 * sudo apache2ctl configtest
@@ -201,7 +202,8 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 
 
 ## Install and configure postgreSQL database and user
-* sudo apt-get install postgresql 
+* sudo apt-get install postgresql
+
 * sudo apt-get install python-sqlalchemy
 * Do not allow remote connections
 * sudo nano /etc/postgresql/9.5/main/pg_hba.conf
@@ -217,9 +219,9 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 ** createdb -O develper myDatabase
 *	exit
 * psql postgres
-** DROP USER 
-	
-			
+** DROP USER
+
+
 * sudo nano /var/www/html/WebDeveloper/database_setup.py
 * sudo python database_setup.py
 * sudo service apache2 restart
@@ -227,7 +229,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 * sudo nano /etc/hosts
 * 54.200.79.28 avensky.com
 
-## Configure and install software to enable HTTPS 
+## Configure and install software to enable HTTPS
 * sudo apt-get update
 * sudo apt-get install software-properties-common
 * sudo add-apt-repository universe
@@ -236,17 +238,16 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 
 * sudo apt-get install certbot python-certbot-apache
 * sudo certbot --apache
-
-	/etc/letsencrypt/live/www.avensky.com/privkey.pem
-	
-	sudo crontab -e
-	1
-	30 4 1 * * sudo certbot renew --quiet
-	
-	 sudo nano /var/log/apache2/error.log
-	 sudo nano /etc/apache2/apache2.con
-	 
-sudo apachectl -k restart
-sudo tail -n 5 /var/log/apache2/error.log
-sudo nano /var/log/apache2/error.log
-
+*	/etc/letsencrypt/live/www.avensky.com/privkey.pem
+*  sudo certbot renew --dry-run
+*  
+*	sudo crontab -e
+*	1
+*	30 4 1 * * sudo certbot renew --quiet
+*
+*	 sudo nano /var/log/apache2/error.log
+*	 sudo nano /etc/apache2/apache2.con
+*	 
+* sudo apachectl -k restart
+* sudo tail -n 5 /var/log/apache2/error.log
+* sudo nano /var/log/apache2/error.log

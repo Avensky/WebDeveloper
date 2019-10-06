@@ -1,9 +1,12 @@
-/****************************************
-*****************************************
+/*******************************************************************************
+********************************************************************************
  CSS Document
-*****************************************
-****************************************/
-body {margin: 0px;}
+********************************************************************************
+*******************************************************************************/
+body {
+	margin: 0px;
+	overflow-x: hidden;
+}
 
 * {
 	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
@@ -60,29 +63,35 @@ a {
 	text-align: center;
 }
 
-
-/****************************************
-*****************************************
-Video background
-*****************************************
-****************************************/
+/*******************************************************************************
+********************************************************************************
+ Video
+********************************************************************************
+*******************************************************************************/
 .video-wrapper {
-}
-
-.video {
+	height: 100vh;
 	width: 100%;
 	display: flex;
-	color: #fff;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+}
+.video-container { }
+.video {width: 100%;}
+
+/* Video for small screens */
+@media (max-width: 600px) {
+		.video-wrapper {height: 100vh;}
 }
 
-/****************************************
-*****************************************
-Nav-bar
-*****************************************
-****************************************/
+/*******************************************************************************
+********************************************************************************
+ Nav-bar
+********************************************************************************
+*******************************************************************************/
 .navbar {
 	display: flex;
-	margin: 0px auto;
+	margin: 0px;
 	background-color: lightcyan;
 	height:6vh;
 	position: fixed;
@@ -108,26 +117,16 @@ Nav-bar
 	justify-content: flex-end;
 	padding-right: 50px;
 }
-.navbox:first-child > span {
-	margin-right: auto;
-}
-
-.navbox:last-child > span {
-	margin-left: auto;
-}
+.navbox:first-child > span {margin-right: auto;}
+.navbox:last-child > span {margin-left: auto;}
 
 .navbar-item {
 	padding: 10px;
 	white-space: nowrap;
 }
 
-.navbar-item a {
-	text-decoration: none;
-}
-
-.navbar-item a:hover {
-	color: black;
-}
+.navbar-item a {text-decoration: none;}
+.navbar-item a:hover {	color: black;}
 
 .box-shadow-menu {
   position: relative;
@@ -153,25 +152,27 @@ Nav-bar
 			0 0.5em 0 0 black;
 }
 
-/****************************************
-*****************************************
-Welcome Section
-*****************************************
-****************************************/
+/*******************************************************************************
+********************************************************************************
+Welcome
+********************************************************************************
+*******************************************************************************/
 
-#welcome-section {
+.welcome-wrapper {
 	top: 0px;
-	min-height: 55vh;
+	min-height: 60vh;
 	padding-top: 45vh;
-	height: 130vh;
 	background-color: lightcyan;
 	text-align: center;
 }
 
-#click-here {
-	margin-top: 150px;
+/* Welcome for small screens */
+@media (max-width: 600px) {
+		.welcome-wrapper {
+		}
 }
 
+#click-here {margin-top: 150px;}
 #click-here h3{
 	padding: 5px;
 	display:inline;
@@ -179,35 +180,20 @@ Welcome Section
 	border-width:3px;
 	border-radius: 50px;
 }
+#click-here:hover {}
 
-#click-here:hover {
-}
+/*******************************************************************************
+********************************************************************************
+ Grid
+********************************************************************************
+*******************************************************************************/
 
-/****************************************
-*****************************************
-grid boxes
-*****************************************
-****************************************/
-.box {
-  background-color: white;
-  color: #fff;
-
-}
-
-.card,.side-card {
-box-shadow: 0 0 20px rgba(0,0,0,.2);
-	padding:2%;
-}
-
-/****************************************
-*****************************************
-grid heading
-*****************************************
-****************************************/
+/* header */
 .header h2{
 	font-size: 3em;
 	margin:0px;
 }
+
 .header h3{
 	margin: 0px;
 	font-size: 1.5em;
@@ -215,139 +201,139 @@ grid heading
 }
 
 .header {
-	grid-area: header;
-	padding: 95px 0 15px;
-	margin: 0 0 25px;
-	border-bottom: solid 2px BLACK;
-	display: grid;
+	align-items: center;
+	margin-bottom:2%;
+	white-space: nowrap;
+	height:100%;
+	border-bottom: solid 2px black;
 }
 
-/****************************************
-*****************************************
-grid content
-*****************************************
-****************************************/
-.content {
-  position: relative;
-}
-
-/****************************************
-*****************************************
-grid footer
-*****************************************
-****************************************/
-
-/************************************************
-*************************************************
-Card grid
-*************************************************
-************************************************/
-
-.content-wrapper {
-	min-height: 130vh;
+/* blog */
+.blog-wrapper {
+	min-height: 90vh;
 	margin: 0 15%;
-	padding: 0px;
-	text-align: left;
+	padding: 10vh 0 0;
 	display: grid;
+	grid-template-rows: 12vh 1fr;
 	grid-template-columns: 25vw;
-	grid-column-gap: 1em;
+	grid-gap: 1em;
 	grid-template-areas:
 		"header  header  header header"
-		"content content content sidebar"
-		"footer  footer  footer footer";
+		"content content content sidebar";
 }
 
 .sidebar	{grid-area: sidebar;}
 .content	{grid-area: content;}
 .header 	{grid-area: header;}
-.footer		{grid-area: footer;}
 
-/****************************************
-*****************************************
-browser window is 600px wide or less
-*****************************************
-****************************************/
+/* blog for small devices*/
 @media (max-width: 600px) {
-		.navcenter { }
 		.navright {display:none;}
-		.content-wrapper {
-			margin: 0px 15%;
-			padding: 55px 0% 55px;
-			display: grid;
-	  	grid-template-columns: 1fr;
-			grid-template-areas:
-				"header"
-				"content"
-				"sidebar"
-				"footer";
-		  color: #444;
-	  }
-
-	.profile-img {
-	  justify-self: center;
-	  max-width: 100%;
-
-	}
-}
-/************************************************
-*************************************************
-Card grid
-*************************************************
-************************************************/
-.card {
-  box-shadow: 0 0 20px rgba(0,0,0,.2);
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-column-gap: 1%;
-  grid-template-areas:
-    "name"
-    "image"
-    "social"
-    "position"
-    "description";
+		.blog-wrapper {
+				margin: 0 2%;
+	  		grid-template-columns: 1fr;
+				grid-template-areas:
+						"header"
+						"content"
+						"sidebar";
+	  	}
 }
 
-/************************************************
-*************************************************
-Card grid
-*************************************************
-************************************************/
+/* project */
+  .project-wrapper {
+		min-height: 90vh;
+		margin: 0 15%;
+		padding: 10vh 0 0;
+		display: grid;
+		grid-template-rows: 12vh 1fr;
+		grid-template-columns: 1fr;
+		grid-gap: 1em;
+    grid-template-areas:
+      "header"
+      "content"
+  }
 
-.profile-name     { grid-area: name; }
-.profile-position { grid-area: position; }
-.profile-info     { grid-area: description; }
-.profile-img      { grid-area: image; }
-.social-list      { grid-area: social; }
+/* project for small devices */
+@media (max-width: 600px) {
+		.project-wrapper {
+	  		margin: 0 2%;
+		}
+}
 
+/* all cards */
+.blog-card,.side-card,.project-card {
+	background-color: rgba(255, 255, 255, 1);
+	box-shadow: 0 0 20px rgba(0,0,0,.2);
+	padding:2%;
+}
 
-/*******************************************
-********************************************
-
-********************************************
-*******************************************/
-
-
-/* Change card layout to fit small screens*/
-@media (min-width: 600px) {
-  .card {
-    text-align: left;
+/* blog card */
+  .blog-card {
+		display: grid;
+		grid-template-rows: 1fr;
     grid-template-columns: 1fr 3fr;
+		grid-gap: 1em;
     grid-template-areas:
       "image name"
       "image position"
       "social description";
   }
 
-  .profile-name::after {
-    margin-left: 0;
-  }
+.profile-name::after {margin-left: 0;}
+.profile-name     { grid-area: name; }
+.profile-img      { grid-area: image; }
+.social-list      { grid-area: social; }
+.profile-position { grid-area: position; }
+.profile-info     { grid-area: description; }
+
+/* blog card for small devices */
+@media (max-width: 600px) {
+		.blog-card {
+	  		grid-template-columns: 1fr;
+	  		grid-template-areas:
+	    			"name"
+	    			"image"
+				    "social"
+				    "position"
+				    "description";
+			}
+		.profile-img {justify-self: center;}
 }
 
-/************************************************
-*************************************************
-Card css
-*************************************************
-************************************************/
+/*project card */
+  .project-card {
+		display: grid;
+		grid-template-rows: 1fr;
+    grid-template-columns: 1fr 3fr;
+		grid-gap: 1em;
+		margin-bottom: 2%;
+    grid-template-areas:
+      "image name"
+      "image position"
+      "social description";
+  }
+
+/* project card for small devices */
+@media (max-width: 600px) {
+		.project-card {
+	  		grid-template-columns: 1fr;
+	  		grid-template-areas:
+	    			"name"
+	    			"image"
+				    "social"
+				    "position"
+				    "description";
+			}
+		.profile-img {justify-self: center;}
+}
+
+
+/*******************************************************************************
+********************************************************************************
+ card css
+********************************************************************************
+*******************************************************************************/
+
 .profile-info {
   font-weight: 300;
   opacity: .7;
@@ -416,45 +402,6 @@ Card css
   margin: 0;
 }
 
-/****************************************
-*****************************************
-project section
-*****************************************
-****************************************/
-#projects{
-	padding: 175px 0px;
-}
-
-.heading {
-	padding: 0px;
-}
-
-.heading h2{
-	text-align:center;
-}
-
-.projects{
-	display:flex;
-	padding: 0px 10%;
-	flex-wrap:wrap;
-	min-height:100%;
-	margin: 0px auto;
-	justify-content: center;
-}
-
-.project-child{
-	margin:10px 25px;
-	min-height: 20em;
-	min-width: 20em;
-	border: 2px solid darkblue;
-	border-radius:1em;
-	background-color: lightblue;
-}
-/****************************************
-*****************************************
-Blog section
-*****************************************
-****************************************/
 
 /****************************************
 *****************************************
@@ -490,7 +437,6 @@ footer
 *****************************************
 ****************************************/
 
-
 #footer {
 	margin: 0px;
 	background-color: darkslategrey;
@@ -498,5 +444,4 @@ footer
 	height:100px;
 	padding: 20px;
 	text-align: center;
-
 }
