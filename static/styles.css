@@ -1,70 +1,5 @@
 /*******************************************************************************
 ********************************************************************************
- CSS Document
-********************************************************************************
-*******************************************************************************/
-body {
-	margin: 0px;
-	overflow-x: hidden;
-}
-
-* {
-	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
-	font-weight: 700;
-}
-
-h1 {
-	font-family: "Helvetica Neue Light", Roboto, Helvetica, Arial, sans-serif;
-	font-size: 50px;
-	color: #51453B;
-	line-height: 60px;
-	font-weight: 300;
-}
-
-h2 {
-	font-size: 3em;
-	color: #42C3C9;
-}
-
-h3 {
-	font-size: 24px;
-	color: #4A4A4A;
-	line-height: 23px;
-}
-
-p {
- 	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
- 	font-size: 16px;
- 	color: #7B7573;
- 	line-height: 24px;
- 	font-weight: 400;
-}
-
-strong {
- 	font-size: 16px;
- 	color: #7B7573;
- 	line-height: 24px;
-}
-
-a {
- 	font-size: 14px;
- 	color: #0093B9;
- 	line-height: 17px;
-}
-
-.flash {
-	background-color: #98FB98;
-	width:100%;
-	text-decoration: none;
-}
-
-.flash li {
-	list-style-type: none;
-	text-align: center;
-}
-
-/*******************************************************************************
-********************************************************************************
  Video
 ********************************************************************************
 *******************************************************************************/
@@ -72,16 +7,28 @@ a {
 	height: 100vh;
 	width: 100%;
 	display: flex;
+	overflow: hidden;
 	justify-content: center;
 	align-items: center;
 	background-color: black;
 }
-.video-container { }
-.video {width: 100%;}
+.video-container {}
+
+.video {
+}
+
+.video video{
+		width: 100%;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+}
 
 /* Video for small screens */
 @media (max-width: 600px) {
-		.video-wrapper {height: 100vh;}
+		.video-wrapper {
+			height: 100vh;
+		}
 }
 
 /*******************************************************************************
@@ -92,8 +39,7 @@ a {
 .navbar {
 	display: flex;
 	margin: 0px;
-	background-color: lightcyan;
-	height:6vh;
+	height:8vh;
 	position: fixed;
 	width: 100%;
 	list-style: none;
@@ -125,8 +71,11 @@ a {
 	white-space: nowrap;
 }
 
-.navbar-item a {text-decoration: none;}
-.navbar-item a:hover {	color: black;}
+.navbar-item a {
+	text-decoration: none;
+	font-size: 1.25em;
+}
+.navbar-item a:hover {	color: purple;}
 
 .box-shadow-menu {
   position: relative;
@@ -159,8 +108,7 @@ Welcome
 *******************************************************************************/
 
 .welcome-wrapper {
-	top: 0px;
-	min-height: 60vh;
+	min-height: 55vh;
 	padding-top: 45vh;
 	background-color: lightcyan;
 	text-align: center;
@@ -428,7 +376,6 @@ Contacts
 	text-align: center;
 	padding: 180px 0 110px 0px;
 	margin: 0px 0px;
-
 }
 
 /****************************************
@@ -443,5 +390,73 @@ footer
 	color: white;
 	height:100px;
 	padding: 20px;
+	text-align: center;
+}
+
+
+
+
+/*******************************************************************************
+********************************************************************************
+ CSS Document
+********************************************************************************
+*******************************************************************************/
+body {
+	margin: 0px;
+	overflow-x: hidden;
+}
+
+* {
+	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 700;
+}
+
+h1 {
+	font-family: "Helvetica Neue Light", Roboto, Helvetica, Arial, sans-serif;
+	font-size: 50px;
+	color: #51453B;
+	line-height: 60px;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 3em;
+	color: #42C3C9;
+}
+
+h3 {
+	font-size: 24px;
+	color: #4A4A4A;
+	line-height: 23px;
+}
+
+p {
+ 	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
+ 	font-size: 16px;
+ 	color: #7B7573;
+ 	line-height: 24px;
+ 	font-weight: 400;
+}
+
+strong {
+ 	font-size: 16px;
+ 	color: #7B7573;
+ 	line-height: 24px;
+}
+
+a {
+ 	font-size: 14px;
+ 	color: #0093B9;
+ 	line-height: 17px;
+}
+
+.flash {
+	background-color: #98FB98;
+	width:100%;
+	text-decoration: none;
+}
+
+.flash li {
+	list-style-type: none;
 	text-align: center;
 }

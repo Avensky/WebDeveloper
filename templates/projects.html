@@ -1,17 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
-<div class="video-wrapper">
-	<div class="video-container">
-		<video class="video" src="{{ url_for('static', filename='vids/intro.mp4') }}" autoplay="true" loop="true"></video>
-	</div>
-</div>
-
-<div class="welcome-wrapper" id="welcome-section">
-	<h1>Hello World, I'm Uriel Zacarias</h1>
-	<h2>full stack web developer</h2>
-	<div id="click-here"><h3>&#171;click here&#187;</h3></div>
-</div>
-
+{% include "welcome.html" %}
 <div class="project-wrapper" id="projects">
 	<div class="box header">
 		<h2>Project Section</h2>
@@ -42,20 +31,6 @@
 			<p class="profile-position">Web Developer</p>
 			<p class="profile-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 		</div>
-
-
-
 	</div>
-
 </div>
-
-
-
-
-
-
-
-
-
-
 {% endblock %}

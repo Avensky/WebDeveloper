@@ -8,29 +8,33 @@
 	<body>
 		<div class="wrapper" style='height: 100%; width: 100%; background:url({{ url_for("static", filename="pics/cl.png")}}) repeat;'>
 			<nav class="navbar" id="navbar">
-				<div class="navbox navleft">
-					<li class="navbar-item"><a href="#" class="box-shadow-menu"></a></li>
-					<li class="navbar-item"><a href="#">About</a></li>
-				</div>
-				<div class="navbox navcenter">
-					<li class="navbar-item"><a href="#">Home</a></li>
-				</div>
-				<div class="navbox navright">
-					<li class="navbar-item"><a href="#">Blog</a></li>
-					<li class="navbar-item"><a href="#">Forum</a></li>
-					<li class="navbar-item"><a href="#">Shop</a></li>
-					<li class="navbar-item"><a href="#">Projects</a></li>
-					<li class="navbar-item"><a href="#">Sign In</a></li>
-				</div>
+			  <div class="navbox navleft">
+			    <li class="navbar-item"><a href="#" class="box-shadow-menu"></a></li>
+			  </div>
+			  <div class="navbox navcenter">
+			    <li class="navbar-item"><a href="{{url_for('showProjects')}}">Home</a></li>
+			  </div>
+			  <div class="navbox navright">
+			    <li class="navbar-item"><a href="#welcome">About</a></li>
+			    <li class="navbar-item"><a href="{{url_for('showProjects')}}#projects">Projects</a></li>
+			    <li class="navbar-item"><a href="{{url_for('showBlog')}}">Blog</a></li>
+			    <li class="navbar-item"><a href="{{url_for('showForum')}}">Forum</a></li>
+			    <li class="navbar-item">
+			    {%if 'username' not in session %}
+			      <a href="{{url_for('showLogin')}}">Login   </a>
+			      {% else %}
+			      <a href="{{url_for('disconnect')}}">Logout </a>
+			    {% endif %}
+			    </li>
+			  </div>
 			</nav>
 
 			{% block content %}
 			{% endblock %}
 
 			<div id="contact">
-					<h2>Let's Work Together </h2>
-					<h6>Come find me!</h6>
-
+				<h2>Let's Work Togethe</h2>
+				<h6>Come find me!</h6>
 				<a class="ctn">Facebook</a>
 				<a href="https://github.com/Avensky" class="ctn" id="profile-link" target="_blank">GitHub</a>
 				<a class="ctn">Twitter</a>
@@ -38,10 +42,9 @@
 				<a class="ctn">Call</a>
 			</div>
 
-			<div id="footer">
-				<h5></h5>
-			</div>
+			<div id="footer"></div>
 		</div>
+
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	</body>

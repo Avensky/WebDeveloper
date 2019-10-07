@@ -313,9 +313,9 @@ def citiesJSON():
 ##############################################################################
 ##############################################################################
 @app.route('/')
-@app.route('/index/')
-def showIndex():
-	return render_template('index.html')
+@app.route('/projects/')
+def showProjects():
+	return render_template('projects.html')
 
 
 ##############################################################################
@@ -324,14 +324,15 @@ def showIndex():
 ##############################################################################
 ##############################################################################
 
+
+
 @app.route('/blog/')
 def showBlog():
 	return render_template('blog.html')
 
-
-
-
-
+@app.route('/forum/')
+def showForum():
+	return render_template('forum.html')
 
 
 
@@ -540,8 +541,8 @@ def disconnect():
     else:
         flash("You were not logged in")
         return redirect(url_for('showCities'))
-		
-		
+
+
 ##############################################################################
 ##############################################################################
 # start app
