@@ -14,21 +14,13 @@
 }
 .video-container {}
 
-.video {
-}
+.video {}
 
 .video video{
 		width: 100%;
 		top: 0;
 		left: 0;
 		pointer-events: none;
-}
-
-/* Video for small screens */
-@media (max-width: 600px) {
-		.video-wrapper {
-			height: 100vh;
-		}
 }
 
 /*******************************************************************************
@@ -156,51 +148,62 @@ Welcome
 	border-bottom: solid 2px black;
 }
 
-/* blog */
-.blog-wrapper {
+/* content-wrapper */
+.content-wrapper {
 	min-height: 90vh;
 	margin: 0 15%;
 	padding: 10vh 0 0;
 	display: grid;
-	grid-template-rows: 12vh 1fr;
-	grid-template-columns: 25vw;
 	grid-gap: 1em;
+	grid-template-rows:12vh min-content;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+	"header"
+	"content"
+}
+.sidebar	{grid-area: sidebar;}
+.content	{grid-area: content;}
+.header 	{grid-area: header;}
+
+/* blog-wrapper*/
+.blog-wrapper {
+	grid-template-columns: 25vw;
 	grid-template-areas:
 		"header  header  header header"
 		"content content content sidebar";
 }
 
-.sidebar	{grid-area: sidebar;}
-.content	{grid-area: content;}
-.header 	{grid-area: header;}
+/* project-wrapper */
+  .project-wrapper {  }
 
-/* blog for small devices*/
-@media (max-width: 600px) {
-		.navright {display:none;}
-		.blog-wrapper {
-				margin: 0 2%;
-	  		grid-template-columns: 1fr;
-				grid-template-areas:
-						"header"
-						"content"
-						"sidebar";
-	  	}
+/* blog-wrapper*/
+.blog-wrapper {
+	grid-template-columns: 25vw;
+	grid-template-areas:
+		"header  header  header header"
+		"content content content sidebar";
 }
 
-/* project */
-  .project-wrapper {
-		min-height: 90vh;
-		margin: 0 15%;
-		padding: 10vh 0 0;
-		display: grid;
-		grid-template-rows: 12vh 1fr;
-		grid-template-columns: 1fr;
-		grid-gap: 1em;
-    grid-template-areas:
-      "header"
-      "content"
-  }
+/* forum wrapper */
+	.forum-wrapper{
+		grid-template-columns: 25vw;
+		grid-template-areas:
+			"header  header  header header"
+			"content content content sidebar";
+	}
 
+	/* blog for small devices*/
+	@media (max-width: 600px) {
+			.navright {display:none;}
+			.blog-wrapper {
+					margin: 0 2%;
+		  		grid-template-columns: 1fr;
+					grid-template-areas:
+							"header"
+							"content"
+							"sidebar";
+		  	}
+	}
 /* project for small devices */
 @media (max-width: 600px) {
 		.project-wrapper {
