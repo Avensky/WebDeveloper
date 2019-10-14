@@ -14,26 +14,55 @@
         </div>
         <div class="login-card-auth">
           <!--FACEBOOK SIGN IN -->
-          <div>
-          <button>
-            <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
-            <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
-            </fb:login-button>
-          </button>
-          </div>
-          <!--GOOGLE SIGN IN -->
-          <div id="signinButton">
-            <span class="g-signin"
-              data-scope="openid email"
-              data-clientid="7173251456-8vjdunpt1ugo70qq3f7na0009qprr9b4.apps.googleusercontent.com"
-              data-redirecturi="postmessage"
-              data-accesstype="offline"
-              data-cookiepolicy="single_host_origin"
-              data-callback="signInCallback">
-            </span>
-          </div>
-          <div id="result"></div>
-          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+          <script>
+var finished_rendering = function() {
+  console.log("finished rendering plugins");
+  var spinner = document.getElementById("spinner");
+  spinner.removeAttribute("style");
+  spinner.removeChild(spinner.childNodes[0]);
+}
+FB.Event.subscribe('xfbml.render', finished_rendering);
+</script>
+<div id="spinner"
+    style="
+        background: #4267b2;
+        color: white;
+        height: 20px;
+        text-align: center;
+        width: 310px;">
+    Loading
+    <div
+    class="fb-login-button"
+    data-max-rows="1"
+    data-size="large"
+    data-button-type="continue_with"
+    data-use-continue-as="true"
+    ></div>
+</div>
+
+<!--GOOGLE SIGN IN -->
+          <div id="my-signin2"></div>
+          <script>
+            function onSuccess(googleUser) {
+              console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+            }
+            function onFailure(error) {
+              console.log(error);
+            }
+            function renderButton() {
+              gapi.signin2.render('my-signin2', {
+                'scope': 'profile email',
+                'width': 310,
+                'height': 30,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+              });
+            }
+          </script>
+
         </div>
         <div class="login-card-sub"
           <button type="submit">Login</button>
@@ -65,7 +94,7 @@
           if (result) {
             $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
             setTimeout(function() {
-              window.location.href = "/city";
+              window.location.href = "/";
             }, 4000);
           } else if (authResult['error']) {
             console.log('There was an error: ' + authResult['error']);
@@ -84,7 +113,7 @@
 <script>
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '703645550075495',
+    appId      : '599583343779617',
     cookie     : true,  // enable cookies to allow the server to access
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -121,7 +150,7 @@
         if (result) {
           $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
           setTimeout(function() {
-          window.location.href = "/city";
+          window.location.href = "/";
         }, 4000);
       } else {
         $('#result').html('Failed to make a server-side call. Check your configuration and console.');

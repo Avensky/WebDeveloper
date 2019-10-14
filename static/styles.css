@@ -166,7 +166,7 @@ Welcome
 	.content	{grid-area: content;}
 	.header 	{grid-area: header;}
 
-/* blog */
+/* blog wrapper */
 .blog-wrapper {
 	grid-template-columns: 25vw;
 	grid-template-areas:
@@ -174,21 +174,11 @@ Welcome
 		"content content content sidebar";
 }
 
-/* project */
-  .project-wrapper {
-			grid-template-columns: 1fr;
-			grid-template-areas:
-				"header"
-				"content"
-	}
+/* project wrapper */
+  .project-wrapper { }
 
-/* login-wrapper */
-	.login-wrapper {
-			grid-template-columns: 1fr;
-			grid-template-areas:
-				"header"
-				"content"
-	}
+/* login wrapper */
+	.login-wrapper { }
 
 /* forum wrapper */
 	.forum-wrapper{
@@ -271,6 +261,17 @@ Welcome
 		"can";
 
 	}
+.login-card-auth 	{
+	display: flex;
+ }
+/* facebook login */
+.fb-login {
+	width: 310px;
+}
+
+/* google log in */
+
+
 .login-card-user 	{ grid-area: user; }
 .login-card-pass 	{ grid-area: pass; }
 .login-card-sub 	{ grid-area: sub; }
