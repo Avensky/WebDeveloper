@@ -192,23 +192,20 @@ Welcome
 			"content content content sidebar";
 	}
 
-	/* blog for small devices*/
-	@media (max-width: 600px) {
-			.navright {display:none;}
-			.blog-wrapper {
-					margin: 0 2%;
-		  		grid-template-columns: 1fr;
-					grid-template-areas:
-							"header"
-							"content"
-							"sidebar";
-		  	}
-	}
-/* project for small devices */
+/* wrappers for small devices*/
 @media (max-width: 600px) {
-		.project-wrapper {
-	  		margin: 0 2%;
-		}
+	.content-wrapper {
+		margin: 0 2%;
+	}
+	.navright {display:none;}
+	.content-wrapper {
+		margin: 0 2%;
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"header"
+			"content"
+			"sidebar";
+	}
 }
 
 /* all cards */
