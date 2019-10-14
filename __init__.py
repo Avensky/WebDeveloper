@@ -31,8 +31,12 @@ session = DBSession()
 # Create anti-forgery state token
 @app.route('/login')
 def showLogin():
+<<<<<<< HEAD
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in xrange(32))
+=======
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits)for x in range(32))
+>>>>>>> db484afb063db1209049b60277c86b086d9e8350
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state)
@@ -51,6 +55,7 @@ def fbconnect():
     access_token = request.data
     print ("access token received %s ") % access_token
 
+<<<<<<< HEAD
     app_id = json.loads(
 	open('/var/www/html/ItemCatalog/fb_client_secrets.json', 'r').read())['web']['app_id']
 
@@ -62,6 +67,16 @@ def fbconnect():
 #
 #    with app.open_resource('fb_client_secrets.json') as f:
 #        app_id = json.load(f)['web']['app_id']
+=======
+#    app_id = json.loads(
+#	open('/var/www/html/WebDeveloper/fb_client_secrets.json', 'r').read())['web']['app_id']
+#
+#    app_secret = json.loads(
+#        open('/var/www/html/WebDeveloper/fb_client_secrets.json', 'r').read())['web']['app_secret']
+
+    with app.open_resource('fb_client_secrets.json') as f:
+    	app_id = json.load(f)['web']['app_id']
+>>>>>>> db484afb063db1209049b60277c86b086d9e8350
 
     url = 'https://graph.facebook.com/oauth/access_token?'
     url += 'grant_type=fb_exchange_token&client_id=%s' % app_id
