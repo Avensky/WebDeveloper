@@ -19,7 +19,7 @@ with app.open_resource('client_secrets.json') as f:
 
 #CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
 #	'web']['client_id']
-APPLICATION_NAME = " "
+APPLICATION_NAME = "Web Developer"
 
 # Connect to Database and create database session
 engine = create_engine('postgresql://developer:86developers@localhost/myDatabase')

@@ -254,6 +254,24 @@ Welcome
 			"image position"
 			"social description";
 	}
+.login-card {
+	width: 620px;
+	text-align: center;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"name"
+		"user"
+		"pass"
+		"auth"
+		"sub"
+		"can";
+	}
+.login-card-user 	{ grid-area: user; }
+.login-card-pass 	{ grid-area: pass; }
+.login-card-sub 	{ grid-area: sub; }
+.login-card-can 	{ grid-area: can; }
+.login-card-auth 	{ grid-area: auth; }
 
 /* cards for small devices */
 @media (max-width: 600px) {
