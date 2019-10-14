@@ -1,3 +1,4 @@
+
 {% extends "main.html" %}
 {% block content %}
 <div class="loging-wrapper content-wrapper" id="login">
@@ -16,7 +17,7 @@
       </div>
       <div class="login-card-auth">
         <!--FABEBOOK SIGN IN -->
-        <div>
+        <div class="fb-showLogin">
           <button>
             <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
             <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
@@ -24,7 +25,7 @@
           </button>
         </div>
         <!--GOOGLE SIGN IN -->
-        <div id="signinButton">
+        <div class="g-signin" id="signinButton">
           <span class="g-signin"
             data-scope="openid email"
             data-clientid="7173251456-8vjdunpt1ugo70qq3f7na0009qprr9b4.apps.googleusercontent.com"
@@ -46,7 +47,6 @@
         <span class="psw">Forgot <a href="#">password?</a></span>
       </div>
     </form>
-
   </div>
 
 <!-- GOOGLE PLUS SIGN IN-->
@@ -134,4 +134,5 @@
   }
 </script>
 <!--END FACEBOOK SIGN IN -->
+</div>
 {% endblock %}
