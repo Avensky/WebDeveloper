@@ -50,14 +50,14 @@ def fbconnect():
     access_token = request.data
     print ("access token received %s ") % access_token
 
-#    app_id = json.loads(
-#	open('/var/www/html/WebDeveloper/fb_client_secrets.json', 'r').read())['web']['app_id']
-#
-#    app_secret = json.loads(
-#        open('/var/www/html/WebDeveloper/fb_client_secrets.json', 'r').read())['web']['app_secret']
+    app_id = json.loads(
+	open('/var/www/html/ItemCatalog/fb_client_secrets.json', 'r').read())['web']['app_id']
 
-    with app.open_resource('fb_client_secrets.json') as f:
-    	app_id = json.load(f)['web']['app_id']
+    app_secret = json.loads(
+        open('/var/www/html/ItemCatalog/fb_client_secrets.json', 'r').read())['web']['app_secret']
+
+#    with app.open_resource('fb_client_secrets.json') as f:
+#    app_id = json.load(f)['web']['app_id']
 
     url = 'https://graph.facebook.com/oauth/access_token?'
     url += 'grant_type=fb_exchange_token&client_id=%s' % app_id
@@ -309,15 +309,14 @@ def citiesJSON():
 ##############################################################################
 ##############################################################################
 @app.route('/')
-@app.route('/home/')
-def showHome():
+@app.route('/projects/')
+def showProjects():
 	return render_template('projects.html')
 
 
 ##############################################################################
 ##############################################################################
 # Show Blog Page
-
 ##############################################################################
 ##############################################################################
 

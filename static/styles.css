@@ -12,15 +12,12 @@
 	align-items: center;
 	background-color: black;
 }
-.video-container {}
-
-.video {}
 
 .video video{
-		width: 100%;
-		top: 0;
-		left: 0;
-		pointer-events: none;
+	width: 100%;
+	top: 0;
+	left: 0;
+	pointer-events: none;
 }
 
 /*******************************************************************************
@@ -35,7 +32,7 @@
 	position: fixed;
 	width: 100%;
 	list-style: none;
-  padding: 0px;
+	padding: 0px;
 	z-index: 10000;
 }
 
@@ -100,7 +97,7 @@ Welcome
 *******************************************************************************/
 
 .welcome-wrapper {
-	min-height: 55vh;
+	height: 55vh;
 	padding-top: 45vh;
 	background-color: lightcyan;
 	text-align: center;
@@ -108,8 +105,8 @@ Welcome
 
 /* Welcome for small screens */
 @media (max-width: 600px) {
-		.welcome-wrapper {
-		}
+	.welcome-wrapper {
+	}
 }
 
 #click-here {margin-top: 150px;}
@@ -148,24 +145,25 @@ Welcome
 	border-bottom: solid 2px black;
 }
 
-/* content-wrapper */
+/* content wrapper */
 .content-wrapper {
 	min-height: 90vh;
 	margin: 0 15%;
 	padding: 10vh 0 0;
 	display: grid;
+	grid-template-rows: 12vh min-content;
 	grid-gap: 1em;
-	grid-template-rows:12vh min-content;
 	grid-template-columns: 1fr;
 	grid-template-areas:
-	"header"
-	"content"
-}
+		"header"
+		"content"
+	}
+	
 .sidebar	{grid-area: sidebar;}
 .content	{grid-area: content;}
 .header 	{grid-area: header;}
 
-/* blog-wrapper*/
+/* blog wrapper */
 .blog-wrapper {
 	grid-template-columns: 25vw;
 	grid-template-areas:
@@ -173,11 +171,14 @@ Welcome
 		"content content content sidebar";
 }
 
-/* project-wrapper */
-  .project-wrapper {  }
+/* project wrapper */
+ .project-wrapper { }
+  
+/* login wrapper */
+.login-wrapper { }
 
-/* blog-wrapper*/
-.blog-wrapper {
+/* forum wrapper */
+.forum-wrapper{
 	grid-template-columns: 25vw;
 	grid-template-areas:
 		"header  header  header header"
@@ -192,14 +193,14 @@ Welcome
 			"content content content sidebar";
 	}
 
+
 /* wrappers for small devices*/
 @media (max-width: 600px) {
-	.content-wrapper {
+	.navright {display:none;}
+	.content-wrapper{
 		margin: 0 2%;
 	}
-	.navright {display:none;}
-	.content-wrapper {
-		margin: 0 2%;
+	.blog-wrapper {
 		grid-template-columns: 1fr;
 		grid-template-areas:
 			"header"
@@ -225,11 +226,70 @@ Welcome
 .profile-position { grid-area: position; }
 .profile-info     { grid-area: description; }
 
+/* blog card */
+.blog-card {
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 3fr;
+	grid-template-areas:
+		"image name"
+		"image position"
+		"social description";
+}
+/* project card */
+.project-card {
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 3fr;
+	grid-template-areas:
+		"image name"
+		"image position"
+		"social description";
+  }
+	/* side card */
+.side-card {
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr 3fr;
+		grid-template-areas:
+			"image name"
+			"image position"
+			"social description";
+	}
+.login-card {
+	width: 620px;
+	text-align: center;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"name"
+		"user"
+		"pass"
+		"auth"
+		"sub"
+		"can";
+
+	}
+.login-card-auth 	{
+	display: flex;
+ }
+/* facebook login */
+.fb-login {
+	width: 310px;
+}
+
+/* google log in */
+
+
+.login-card-user 	{ grid-area: user; }
+.login-card-pass 	{ grid-area: pass; }
+.login-card-sub 	{ grid-area: sub; }
+.login-card-can 	{ grid-area: can; }
+.login-card-auth 	{ grid-area: auth; }
+
+
 /*project card */
 .project-card {
 	grid-template-rows: 1fr;
-  grid-template-columns: 1fr 3fr;
-  grid-template-areas:
+	grid-template-columns: 1fr 3fr;
+	grid-template-areas:
     "image name"
     "image position"
     "social description";
@@ -254,6 +314,7 @@ Welcome
 			"image position"
 			"social description";
 	}
+	
 .login-card {
 	width: 620px;
 	text-align: center;
@@ -266,37 +327,46 @@ Welcome
 		"auth"
 		"sub"
 		"can";
-	}
+}
+.login-card-auth 	{
+	display: flex;
+ }
+/* facebook login */
+.fb-login {
+	width: 310px;
+}
+	
+/* google log in */
+	
 .login-card-user 	{ grid-area: user; }
 .login-card-pass 	{ grid-area: pass; }
 .login-card-sub 	{ grid-area: sub; }
 .login-card-can 	{ grid-area: can; }
 .login-card-auth 	{ grid-area: auth; }
 
-/* cards for small devices */
+
+/* card for small devices */
 @media (max-width: 600px) {
 	.blog-card {
 		grid-template-columns: 1fr;
 		grid-template-areas:
 			"name"
 			"image"
-	    "social"
-	    "position"
-	    "description";
+			"social"
+			"position"
+			"description";
 	}
-	.profile-img {justify-self: center;}
 	.project-card {
 		grid-template-columns: 1fr;
 		grid-template-areas:
 			"name"
 			"image"
-	    "social"
-	    "position"
-	    "description";
-		}
+			"social"
+			"position"
+			"description";
+	}
 	.profile-img {justify-self: center;}
 }
-
 
 /*******************************************************************************
 ********************************************************************************

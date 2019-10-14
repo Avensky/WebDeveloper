@@ -11,17 +11,19 @@
 		<title>Uriel Zacarias</title>
 	</head>
 	<body>
-		<div class="wrapper" style='height: 100%; width: 100%; background:url({{ url_for("static", filename="pics/cl.png")}}) repeat;'>
+		<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=599583343779617&autoLogAppEvents=1"></script>
+		<div class="wrapper" style='height: 100%; width: 100%; background:url({{ url_for("static", filename="pics/circlelight.png")}}) repeat;'>
 			<nav class="navbar" id="navbar">
 			  <div class="navbox navleft">
 			    <li class="navbar-item"><a href="#" class="box-shadow-menu"></a></li>
 			  </div>
 			  <div class="navbox navcenter">
-			    <li class="navbar-item"><a href="{{url_for('showHome')}}">Home</a></li>
+			    <li class="navbar-item"><a href="{{url_for('showProjects')}}">Home</a></li>
 			  </div>
 			  <div class="navbox navright">
-			    <li class="navbar-item"><a href="{{url_for('showHome')}}#welcome">About</a></li>
-			    <li class="navbar-item"><a href="{{url_for('showHome')}}#projects">Projects</a></li>
+			    <li class="navbar-item"><a href="#welcome">About</a></li>
+			    <li class="navbar-item"><a href="{{url_for('showProjects')}}#projects">Projects</a></li>
 			    <li class="navbar-item"><a href="{{url_for('showBlog')}}">Blog</a></li>
 			    <li class="navbar-item"><a href="{{url_for('showForum')}}">Forum</a></li>
 			    <li class="navbar-item">
@@ -50,7 +52,9 @@
 			<div id="footer"></div>
 		</div>
 
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	</body>
 </html>
