@@ -145,6 +145,12 @@ Welcome
 	border-bottom: solid 2px black;
 }
 
+/* center content box*/
+.login-box{
+	display: flex;
+	justify-content: center;
+}
+
 /* content wrapper */
 .content-wrapper {
 	min-height: 90vh;
@@ -158,7 +164,7 @@ Welcome
 		"header"
 		"content"
 	}
-	
+
 .sidebar	{grid-area: sidebar;}
 .content	{grid-area: content;}
 .header 	{grid-area: header;}
@@ -172,8 +178,8 @@ Welcome
 }
 
 /* project wrapper */
- .project-wrapper { }
-  
+.project-wrapper { }
+
 /* login wrapper */
 .login-wrapper { }
 
@@ -192,7 +198,6 @@ Welcome
 			"header  header  header header"
 			"content content content sidebar";
 	}
-
 
 /* wrappers for small devices*/
 @media (max-width: 600px) {
@@ -269,81 +274,15 @@ Welcome
 	}
 .login-card-auth 	{
 	display: flex;
+	justify-content: center;
  }
-/* facebook login */
-.fb-login {
-	width: 310px;
-}
 
 /* google log in */
-
-
 .login-card-user 	{ grid-area: user; }
 .login-card-pass 	{ grid-area: pass; }
 .login-card-sub 	{ grid-area: sub; }
 .login-card-can 	{ grid-area: can; }
 .login-card-auth 	{ grid-area: auth; }
-
-
-/*project card */
-.project-card {
-	grid-template-rows: 1fr;
-	grid-template-columns: 1fr 3fr;
-	grid-template-areas:
-    "image name"
-    "image position"
-    "social description";
-}
-
-/* blog card */
-.blog-card {
-	grid-template-rows: 1fr;
-  grid-template-columns: 1fr 3fr;
-  grid-template-areas:
-    "image name"
-    "image position"
-    "social description";
-  }
-
-/* side card */
-.side-card {
-		grid-template-rows: 1fr;
-		grid-template-columns: 1fr 3fr;
-		grid-template-areas:
-			"image name"
-			"image position"
-			"social description";
-	}
-	
-.login-card {
-	width: 620px;
-	text-align: center;
-	grid-template-rows: 1fr;
-	grid-template-columns: 1fr;
-	grid-template-areas:
-		"name"
-		"user"
-		"pass"
-		"auth"
-		"sub"
-		"can";
-}
-.login-card-auth 	{
-	display: flex;
- }
-/* facebook login */
-.fb-login {
-	width: 310px;
-}
-	
-/* google log in */
-	
-.login-card-user 	{ grid-area: user; }
-.login-card-pass 	{ grid-area: pass; }
-.login-card-sub 	{ grid-area: sub; }
-.login-card-can 	{ grid-area: can; }
-.login-card-auth 	{ grid-area: auth; }
-
 
 /* card for small devices */
 @media (max-width: 600px) {
