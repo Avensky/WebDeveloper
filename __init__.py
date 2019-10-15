@@ -322,19 +322,6 @@ def showHome():
 
 
 
-@app.route('/blog/')
-def showBlog():
-	return render_template('blog.html')
-
-@app.route('/forum/')
-def showForum():
-	return render_template('forum.html')
-
-
-
-
-
-
 
 ##############################################################################
 ##############################################################################
