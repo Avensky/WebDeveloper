@@ -309,9 +309,9 @@ def citiesJSON():
 ##############################################################################
 ##############################################################################
 @app.route('/')
-@app.route('/projects/')
-def showProjects():
-	return render_template('projects.html')
+@app.route('/home')
+def showHome():
+	return render_template('home.html')
 
 
 ##############################################################################
