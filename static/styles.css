@@ -224,21 +224,23 @@ Welcome
 	margin-bottom: 2%;
 }
 
-.profile-name::after {margin-left: 0;}
-.profile-name     { grid-area: name; }
-.profile-img      { grid-area: image; }
+.card-name::after {margin-left: 0;}
+.card-name     { grid-area: name; }
+.card-img      { grid-area: image; }
 .social-list      { grid-area: social; }
-.profile-position { grid-area: position; }
-.profile-info     { grid-area: description; }
+.card-position { grid-area: position; }
+.card-info     { grid-area: description; }
 
 /* blog card */
 .blog-card {
 	grid-template-rows: 1fr;
-	grid-template-columns: 1fr 3fr;
+	grid-template-columns: 1fr;
 	grid-template-areas:
-		"image name"
-		"image position"
-		"social description";
+		"image"
+		"name"
+		"position"
+		"description"
+		"social";
 }
 /* project card */
 .project-card {
@@ -304,7 +306,7 @@ Welcome
 			"position"
 			"description";
 	}
-	.profile-img {justify-self: center;}
+	.card-img {justify-self: center;}
 }
 
 /*******************************************************************************
@@ -313,19 +315,19 @@ Welcome
 ********************************************************************************
 *******************************************************************************/
 
-.profile-info {
+.card-info {
   font-weight: 300;
   opacity: .7;
 }
 
-.profile-name {
+.card-name {
   letter-spacing: 1px;
   font-size: 2rem;
   margin: .75em 0 0;
   line-height: 1;
 }
 
-.profile-name::after {
+.card-name::after {
   content: '';
   display: block;
   width: 2em;
@@ -335,7 +337,7 @@ Welcome
   opacity: .25;
 }
 
-.profile-position {
+.card-position {
   text-transform: uppercase;
   font-size: .875rem;
   letter-spacing: 3px;
@@ -344,14 +346,13 @@ Welcome
   color: #5bcbf0;
 }
 
-.profile-img {
+.card-img {
   justify-self: center;
   max-width: 100%;
-  border-radius: 50%;
   border: 2px solid white;
 }
 
-.social-list {
+.social-list, .card-social {
   justify-self: center;
   list-style: none;
   justify-content: space-between;
@@ -382,6 +383,33 @@ Welcome
 }
 
 
+
+
+.card-title {
+  letter-spacing: 1px;
+  margin: .15em 0 .55em;
+  line-height: 1;
+	font-size: 2rem;
+}
+.card-author {
+  text-transform: uppercase;
+  font-size: .875rem;
+  letter-spacing: 3px;
+  margin: .35em 0;
+  line-height: 1;
+  color: #5bcbf0;
+}
+
+.card-content {
+  font-weight: 300;
+  opacity: .7;
+	margin: 0 0;
+}
+
+
+.blog-card, .card-img{
+	border-radius: 0;
+}
 /****************************************
 *****************************************
 Button
@@ -465,7 +493,6 @@ p {
  	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
  	font-size: 16px;
  	color: #7B7573;
- 	line-height: 24px;
  	font-weight: 400;
 }
 
