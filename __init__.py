@@ -341,16 +341,21 @@ def showHome():
 # LoginForm
 ##############################################################################
 ##############################################################################
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
 	form = RegistrationForm()
+	if  form.validate_on_submit():
+		flash(f'Account created for {form.username.data}!')
+		return redirect(url_for('showHome'))
+
 	return render_template('register.html', title='Register', form=form)
+
 ##############################################################################
 ##############################################################################
 # LoginForm
 ##############################################################################
 ##############################################################################
-@app.route('/login')
+@app.route('/log')
 def login():
 	form = LoginForm()
 	return render_template('login.html', title='Login', form=form)

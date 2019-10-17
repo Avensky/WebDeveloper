@@ -4,8 +4,8 @@
   <div class="box header"></div>
 	<div class="box content center-box">
     <div class= "register-card card">
-      <form method="post" action="">
-        {{ form.hidden_tag }}
+      <form method="POST" action="">
+        {{ form.hidden_tag() }}
         <fieldset>
           <legend>Register Today!</legend>
           <p>Please fill in this form to create an account.</p>
@@ -55,7 +55,7 @@
                   {% endfor %}
                 </div>
             {% else %}
-              {{ form.confirm_password(placeholder="Enter Password") }}
+              {{ form.confirm_password(placeholder="Confirm Password") }}
             {% endif %}
 
         </fieldset>
