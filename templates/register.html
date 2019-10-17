@@ -1,0 +1,78 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="login-wrapper content-wrapper" id="register">
+  <div class="box header"></div>
+	<div class="box content form-box">
+    <form class="form-card register-card card" method="post" action="">
+      {{ form.hidden_tag }}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Register Today!</legend>
+
+        <div class="form-card-user">
+          {{ form.username.label }}
+          {% if form.username.errors %}
+            {{ form.username }}
+            <div class="invalid-feedback">
+              {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.username(placeholder="Enter Username") }}
+          {% endif %}
+        </div>
+
+        <div class="form-card-email">
+          {{ form.email.label }}
+          {% if form.email.errors %}
+            {{ form.email }}
+            <div class="invalid-feedback">
+              {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+          {{ form.email(placeholder="Enter Email") }}
+          {% endif %}
+        </div>
+
+        <div class="card-card-pass">
+            {{ form.password.label }}
+            {% if form.password.errors %}
+                {{ form.password }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.password(placeholder="Enter Password") }}
+            {% endif %}
+        </div>
+
+        <div class="form-card-conf-pass">
+            {{ form.confirm_password.label }}
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password }}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.confirm_password(placeholder="Enter Password") }}
+            {% endif %}
+        </div>
+      </fieldset>
+      <div class="form-group">
+        {{ form.submit(class="form-card-btn") }}
+      </div>
+    </form>
+  </div>
+  <div class="">
+    <small class="text-muted">
+        Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+    </small>
+  </div>
+</div>
+{% endblock %}

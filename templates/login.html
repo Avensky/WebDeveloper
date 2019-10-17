@@ -1,20 +1,20 @@
 {% extends "main.html" %}
 {% block content %}
-<div class="loging-wrapper content-wrapper" id="login">
+<div class="login-wrapper content-wrapper" id="login">
   <div class="box header">
 	</div>
 
-	<div class="box content login-box">
-    <form class="login-card card">
-      <div class="login-card-user">
-        <label for="username">Username</label>
-        <input type="text" placeholder="Enter Username" name="username" required>
+	<div class="box content form-box">
+    <form class="form-card login-card card">
+      <div class="form-card-email">
+        <label for="email">Email</label>
+        <input type="text" placeholder="Enter Email" name="email" required>
       </div>
-      <div class="login-card-pass">
+      <div class="form-card-pass">
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
       </div>
-      <div class="login-card-auth">
+      <div class="form-card-auth">
         <!--FABEBOOK SIGN IN -->
         <div class="fb-showLogin">
           <button>
@@ -37,11 +37,11 @@
         <div id="result"></div>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
       </div>
-      <div class="login-card-sub"
+      <div class="form-card-btn"
         <button type="submit">Login</button>
         <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>
       </div>
-      <div class="login-card-can"
+      <div class="form-card-cancel"
         <button type="button" class="cancelbtn">Cancel</button>
         <span class="psw">Forgot <a href="#">password?</a></span>
       </div>

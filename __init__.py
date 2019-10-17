@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
+from forms import RegistrationForm, LoginForm
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, City, RestaurantItem, User
@@ -337,9 +338,25 @@ def showHome():
 
 ##############################################################################
 ##############################################################################
-# Show Blog Page
+# LoginForm
 ##############################################################################
 ##############################################################################
+@app.route('/register')
+def register():
+	form = RegistrationForm()
+	return render_template('register.html', title='Register', form=form)
+##############################################################################
+##############################################################################
+# LoginForm
+##############################################################################
+##############################################################################
+@app.route('/login')
+def login():
+	form = LoginForm()
+	return render_template('login.html', title='Login', form=form)
+
+
+
 
 
 ##############################################################################

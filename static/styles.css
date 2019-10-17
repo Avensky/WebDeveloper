@@ -146,7 +146,7 @@ Welcome
 }
 
 /* center content box*/
-.login-box{
+.form-box{
 	display: flex;
 	justify-content: center;
 }
@@ -183,6 +183,9 @@ Welcome
 /* login wrapper */
 .login-wrapper { }
 
+/* form wrapper */
+.form-wrapper { }
+
 /* forum wrapper */
 .forum-wrapper{
 	grid-template-columns: 25vw;
@@ -192,12 +195,12 @@ Welcome
 }
 
 /* forum wrapper */
-	.forum-wrapper{
-		grid-template-columns: 25vw;
-		grid-template-areas:
-			"header  header  header header"
-			"content content content sidebar";
-	}
+.forum-wrapper{
+	grid-template-columns: 25vw;
+	grid-template-areas:
+		"header  header  header header"
+		"content content content sidebar";
+}
 
 /* wrappers for small devices*/
 @media (max-width: 600px) {
@@ -286,31 +289,56 @@ Welcome
   display: flex;                       /* SHOW LIST (IF CHECKED) */
 }
 
-.login-card {
+.form-card {
 	width: 620px;
 	text-align: center;
 	grid-template-rows: 1fr;
 	grid-template-columns: 1fr;
+}
+
+.register-card {
 	grid-template-areas:
 		"name"
 		"user"
 		"pass"
 		"auth"
-		"sub"
+		"btn"
 		"can";
+}
+.login-card {
+	grid-template-areas:
+		"email"
+		"pass"
+		"auth"
+		"btn"
+		"cancel";
+}
 
-	}
-.login-card-auth 	{
+.form-card-auth {
 	display: flex;
 	justify-content: center;
- }
+}
 
-/* google log in */
-.login-card-user 	{ grid-area: user; }
-.login-card-pass 	{ grid-area: pass; }
-.login-card-sub 	{ grid-area: sub; }
-.login-card-can 	{ grid-area: can; }
-.login-card-auth 	{ grid-area: auth; }
+/* form */
+.form-card-user 	{ grid-area: user; }
+.form-card-pass 	{ grid-area: pass; }
+.form-card-btn 	{ grid-area: btn; }
+.form-card-can 	{ grid-area: can; }
+.form-card-auth 	{ grid-area: auth; }
+.form-card-email 	{	grid-area: email; }
+.from-comf-pass 	{	grid-aread: conf-pass; }
+
+.register-card {
+	width: 620px;
+	text-align: center;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"email"
+		"pass"
+		"conf-pass"
+		"";
+}
 
 /* card for small devices */
 @media (max-width: 600px) {
