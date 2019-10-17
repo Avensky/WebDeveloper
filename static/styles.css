@@ -229,7 +229,8 @@ Welcome
 .card-img      { grid-area: image; }
 .social-list      { grid-area: social; }
 .card-position { grid-area: position; }
-.card-info     { grid-area: description; }
+.card-info     { grid-area: info; }
+.card-archive { grid-area: archive; }
 
 /* blog card */
 .blog-card {
@@ -237,10 +238,9 @@ Welcome
 	grid-template-columns: 1fr;
 	grid-template-areas:
 		"image"
-		"name"
-		"position"
-		"description"
-		"social";
+		"title"
+		"author"
+		"content";
 }
 /* project card */
 .project-card {
@@ -249,17 +249,43 @@ Welcome
 	grid-template-areas:
 		"image name"
 		"image position"
-		"social description";
+		"social info";
   }
+
+	/* Forum card */
+	.forum-card {
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"image title"
+			"image author"
+			"social content"
+	}
 	/* side card */
 .side-card {
-		grid-template-rows: 1fr;
-		grid-template-columns: 1fr 3fr;
+		grid-template-columns: 1fr;
 		grid-template-areas:
-			"image name"
-			"image position"
-			"social description";
+			"image"
+			"name"
+			"position"
+			"title"
+			"archive"
+			"info";
 	}
+
+[id^="togList"],                        /* HIDE CHECKBOX */
+[id^="togList"] ~ .list,                /* HIDE LIST */
+[id^="togList"] + label  span + span,   /* HIDE "Collapse" */
+[id^="togList"]:checked + label span{   /* HIDE "Expand" (IF CHECKED) */
+  display:none;
+}
+[id^="togList"]:checked + label span + span{
+  display:inline-flex;                 /* SHOW "Collapse" (IF CHECKED) */
+}
+[id^="togList"]:checked ~ .list{
+  display: flex;                       /* SHOW LIST (IF CHECKED) */
+}
+
 .login-card {
 	width: 620px;
 	text-align: center;
@@ -295,7 +321,7 @@ Welcome
 			"image"
 			"social"
 			"position"
-			"description";
+			"info";
 	}
 	.project-card {
 		grid-template-columns: 1fr;
@@ -304,9 +330,10 @@ Welcome
 			"image"
 			"social"
 			"position"
-			"description";
+			"info";
 	}
-	.card-img {justify-self: center;}
+	.card-img {
+		justify-self: center;}
 }
 
 /*******************************************************************************
@@ -321,6 +348,7 @@ Welcome
 }
 
 .card-name {
+	text: nowrap;
   letter-spacing: 1px;
   font-size: 2rem;
   margin: .75em 0 0;
@@ -349,7 +377,12 @@ Welcome
 .card-img {
   justify-self: center;
   max-width: 100%;
+	border-radius: 50%;
   border: 2px solid white;
+}
+
+.blog-card-img{
+	border-radius: 0;
 }
 
 .social-list, .card-social {
@@ -406,10 +439,6 @@ Welcome
 	margin: 0 0;
 }
 
-
-.blog-card, .card-img{
-	border-radius: 0;
-}
 /****************************************
 *****************************************
 Button

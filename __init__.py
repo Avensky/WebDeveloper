@@ -313,13 +313,13 @@ posts = [
 	{
 		'author': 'uriel zacarias',
 		'title': 'blog post 1',
-		'content': 'First Butsnatch content',
+		'content': 'First sample content',
 		'date_posted': 'December 2, 1990'
 	},
 	{
 		'author': 'uriel zacarias',
 		'title': 'blog post 2',
-		'content': 'second Butsnatch content',
+		'content': 'Second sample content',
 		'date_posted': 'December 2, 1990'
 	}
 ]
