@@ -2,17 +2,6 @@
 	<div class="box header">
 		<h2>Blog Section</h2>
 		<h3>An enthusiast's journey into Web Development</h3>
-		{% with messages = get_flashed_messages(with_categories=true) %}
-			{% if messages %}
-				{% for category, message in messages %}
-					<div class="alert alert-{{ category }}">
-						{{ message }}
-					</div>
-				{% endfor %}
-			{% endif %}
-		{% endwith %}
-		{% block content %}{% endblock %}
-
 	</div>
 
 	<div class="box content">
