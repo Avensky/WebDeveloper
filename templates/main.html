@@ -40,15 +40,7 @@
 			    </li>
 			  </div>
 			</nav>
-			{% with messages = get_flashed_messages() %}
-				{% if messages %}
-				<ul>
-					{% for message in messages %}
-		      <li><strong> {{ message }} </strong></li>
-		    	{% endfor %}
-		    </ul>
-			{% endif %}
-			{% endwith %}
+			
 			{% block content %}{% endblock %}
 			<div id="contact">
 				<h2>Let's Work Together!</h2>

@@ -39,6 +39,39 @@ def showLogin():
 
 ##############################################################################
 ##############################################################################
+# LoginForm
+##############################################################################
+##############################################################################
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+	form = RegistrationForm()
+	if  form.validate_on_submit():
+		flash(f'Account created for {form.username.data}!', 'success')
+		return redirect(url_for('showHome'))
+	return render_template('register.html', title='Register', form=form)
+
+
+##############################################################################
+##############################################################################
+# LoginForm
+##############################################################################
+##############################################################################
+@app.route('/log', methods=['GET', 'POST'])
+def login():
+	state = ''.join(random.choice(string.ascii_uppercase + string.digits)for x in range(32))
+	login_session['state'] = state
+	form = LoginForm()
+	if form.validate_on_submit():
+		if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+			flash('You have been logged in!', 'success')
+			return redirect(url_for('home'))
+		else:
+			flash('Login Unsuccessful. Please check username and password', 'danger')
+# return "The current session state is %s" % login_session['state']
+	return render_template('login.html', STATE=state, title='Login', form=form)
+
+##############################################################################
+##############################################################################
 # facebook
 ##############################################################################
 ##############################################################################
@@ -334,34 +367,6 @@ posts = [
 @app.route('/home')
 def showHome():
 	return render_template('home.html', posts=posts)
-
-
-##############################################################################
-##############################################################################
-# LoginForm
-##############################################################################
-##############################################################################
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-	form = RegistrationForm()
-	if  form.validate_on_submit():
-		flash(f'Account created for {form.username.data}!')
-		return redirect(url_for('showHome'))
-
-	return render_template('register.html', title='Register', form=form)
-
-##############################################################################
-##############################################################################
-# LoginForm
-##############################################################################
-##############################################################################
-@app.route('/log')
-def login():
-	form = LoginForm()
-	return render_template('login.html', title='Login', form=form)
-
-
-
 
 
 ##############################################################################
