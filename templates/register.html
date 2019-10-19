@@ -69,10 +69,13 @@
 
         </fieldset>
         <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-        {{ form.submit(class="registerbtn") }}
-
+        <div class="form-group">
+          {{ form.submit(class="registerbtn btn-outline-info") }}
+        </div>
       </form>
-      <p>Already Have An Account? <a class="" href="{{ url_for('showLogin') }}">Sign In</a></p>
+      <small class="text-muted">
+        <p>Already Have An Account? <a class="" href="{{ url_for('showLogin') }}">Sign In</a></p>
+      </small>
     </div>
   </div>
 </div>
