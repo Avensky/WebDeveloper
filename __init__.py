@@ -37,6 +37,18 @@ def showLogin():
     # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state)
 
+
+##############################################################################
+##############################################################################
+# Show Home Page
+##############################################################################
+##############################################################################
+@app.route('/')
+@app.route('/home')
+def showHome():
+	return render_template('home.html', posts=posts)
+
+
 ##############################################################################
 ##############################################################################
 # LoginForm
@@ -47,7 +59,7 @@ def register():
 	form = RegistrationForm()
 	if  form.validate_on_submit():
 		flash(f'Account created for {form.username.data}!', 'success')
-		return redirect(url_for('showHome'))
+		return redirect(url_for('showHome', _anchor='welcome'))
 	return render_template('register.html', title='Register', form=form)
 
 
@@ -64,7 +76,7 @@ def login():
 	if form.validate_on_submit():
 		if form.email.data == 'admin@blog.com' and form.password.data == 'password':
 			flash('You have been logged in!', 'success')
-			return redirect(url_for('home'))
+			return redirect(url_for('home', id='blog'))
 		else:
 			flash('Login Unsuccessful. Please check username and password', 'danger')
 # return "The current session state is %s" % login_session['state']
@@ -343,6 +355,7 @@ def citiesJSON():
 ##############################################################################
 ##############################################################################
 
+
 posts = [
 	{
 		'author': 'uriel zacarias',
@@ -357,16 +370,6 @@ posts = [
 		'date_posted': 'December 2, 1990'
 	}
 ]
-
-##############################################################################
-##############################################################################
-# Show Home Page
-##############################################################################
-##############################################################################
-@app.route('/')
-@app.route('/home')
-def showHome():
-	return render_template('home.html', posts=posts)
 
 
 ##############################################################################
