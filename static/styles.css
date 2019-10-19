@@ -97,7 +97,7 @@ welcome wrapper
 *******************************************************************************/
 
 .welcome-wrapper {
-	height: 55vh;
+	min-height: 100vh;
 	padding-top: 45vh;
 	background-color: lightcyan;
 	text-align: center;
@@ -326,14 +326,14 @@ register card
 *******************************************************************************/
 .register-card {
 	width: 620px;
-	text-align: center;
+	text-align: ;
 }
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
-  padding: 15px 0;
-  margin: 5px 0 22px 0;
+  padding:;
+  margin: 5px 0 0 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
