@@ -289,44 +289,16 @@ welcome wrapper
   display: flex;                       /* SHOW LIST (IF CHECKED) */
 }
 
-.form-card {
-	width: 620px;
-	text-align: center;
-	grid-template-rows: 1fr;
-	grid-template-columns: 1fr;
-}
-
-.login-card {
-	grid-template-areas:
-		"email"
-		"pass"
-		"auth"
-		"btn"
-		"cancel";
-}
-
 .form-card-auth {
 	display: flex;
 	justify-content: center;
 }
 
-/* form */
-.form-card-user 	{ grid-area: user; }
-.form-card-pass 	{ grid-area: pass; }
-.form-card-btn 	{ grid-area: btn; }
-.form-card-can 	{ grid-area: can; }
-.form-card-auth 	{ grid-area: auth; }
-.form-card-email 	{	grid-area: email; }
-.from-comf-pass 	{	grid-aread: conf-pass; }
-
-/*******************************************************************************
-********************************************************************************
-register card
-********************************************************************************
-*******************************************************************************/
 .register-card {
 	width: 620px;
-	text-align: ;
+}
+.login-card {
+	width: 620px;
 }
 
 /* Full-width input fields */

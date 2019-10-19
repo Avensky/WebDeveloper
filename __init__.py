@@ -51,7 +51,7 @@ def showHome():
 
 ##############################################################################
 ##############################################################################
-# LoginForm
+# register form
 ##############################################################################
 ##############################################################################
 @app.route('/register', methods=['GET', 'POST'])
@@ -76,7 +76,7 @@ def login():
 	if form.validate_on_submit():
 		if form.email.data == 'admin@blog.com' and form.password.data == 'password':
 			flash('You have been logged in!', 'success')
-			return redirect(url_for('home', id='blog'))
+			return redirect(url_for('showHome', _anchor='welcome'))
 		else:
 			flash('Login Unsuccessful. Please check username and password', 'danger')
 # return "The current session state is %s" % login_session['state']
