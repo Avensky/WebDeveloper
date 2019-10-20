@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
 from forms import RegistrationForm, LoginForm
+from flask_bcrypt import Bcrypt
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, City, RestaurantItem, User, Post
@@ -30,6 +31,9 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+#hashing algorythm
+bcrypt= Bcrypt(app)
+
 # Create anti-forgery state token
 @app.route('/login')
 def showLogin():
@@ -59,8 +63,12 @@ def showHome():
 def register():
 	form = RegistrationForm()
 	if  form.validate_on_submit():
+		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+		session.add(user)
+		session.commit()
 		flash(f'Account created for {form.username.data}!', 'success')
-		return redirect(url_for('showHome', _anchor='welcome'))
+		return redirect(url_for('login', _anchor='welcome'))
 	return render_template('register.html', title='Register', form=form)
 
 

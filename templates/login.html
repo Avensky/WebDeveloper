@@ -1,7 +1,17 @@
 {% extends "main.html" %}
 {% block content %}
 <div class="login-wrapper content-wrapper" id="login">
-  <div class="box header"></div>
+  <div class="box header">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
 	<div class="box content center-box">
     <div class= "login-card card">
       <form method="POST" action="">
