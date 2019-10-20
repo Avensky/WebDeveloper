@@ -27,7 +27,6 @@ APPLICATION_NAME = "Web Developer"
 engine = create_engine('sqlite:///webdev.db')
 #engine = create_engine('postgresql://developer:86developers@localhost/myDatabase')
 Base.metadata.bind = engine
-
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
