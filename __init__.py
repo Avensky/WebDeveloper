@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for, f
 from forms import RegistrationForm, LoginForm
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, City, RestaurantItem, User
+from database_setup import Base, City, RestaurantItem, User, Post
 from flask import session as login_session
 import random
 import string
@@ -23,7 +23,8 @@ with app.open_resource('client_secrets.json') as f:
 APPLICATION_NAME = "Web Developer"
 
 # Connect to Database and create database session
-engine = create_engine('postgresql://developer:86developers@localhost/myDatabase')
+engine = create_engine('sqlite:///webdev.db')
+#engine = create_engine('postgresql://developer:86developers@localhost/myDatabase')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)

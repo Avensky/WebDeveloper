@@ -251,3 +251,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 * sudo apachectl -k restart
 * sudo tail -n 5 /var/log/apache2/error.log
 * sudo nano /var/log/apache2/error.log
+
+pip install flask-wtf
+pip install sqlalchemy
+pip install flask_bcrypt
