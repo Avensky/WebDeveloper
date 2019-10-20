@@ -25,14 +25,14 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = session.query(User).filter_by(username=username.data).first()
         if user:
-            raise ValidationError('That username is take. Please Choose a different one.')
+            raise ValidationError('That username is taken. Please Choose a different one.')
 
     def validate_email(self, email):
 #        user = User.query.filter_by(email=email.data).first()
         user = session.query(User).filter_by(email=email.data).first()
 
         if user:
-            raise ValidationError('That email is take. Please Choose a different one.')
+            raise ValidationError('That email is taken. Please Choose a different one.')
 
 
 class LoginForm(FlaskForm):
