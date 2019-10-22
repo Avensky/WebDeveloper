@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from sqlalchemy import create_engine, asc
@@ -110,14 +110,25 @@ def login():
 
 ################################################################################
 ################################################################################
-# settings
+# account
 ################################################################################
 ################################################################################
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
+	form = UpdateAccountForm()
+	if form.validate_on_submit():
+		current_user.username = form.username.data
+		current_user.email = form.email.data
+		session.commit()
+		flash('your account has been updated', 'success')
+		return redirect(url_for('account'))
+	elif request.method == 'GET':
+		form.username.data = current_user.username
+		form.email.data = current_user.email
 	image_file = url_for('static', filename='pics/' + current_user.picture)
-	return render_template('account.html', title='account', image_file=image_file)
+	return render_template('account.html', title='account',
+							image_file=image_file, form=form)
 
 
 ################################################################################
