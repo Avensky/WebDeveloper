@@ -17,7 +17,7 @@ class User(Base, UserMixin):
     id = Column(Integer, primary_key=True)
     username = Column(String(20), unique=True, nullable=False)
     email = Column(String(120),  unique=True, nullable=False)
-    picture = Column(String(20), nullable=False, default='blank_user.gif')
+    image_file = Column(String(20), nullable=False, default='blank_user.gif')
     password = Column(String(60), nullable=False)
     posts = relationship('Post', backref='author', lazy=True)
 
