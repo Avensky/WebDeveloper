@@ -18,6 +18,19 @@ from flask_login import LoginManager, login_user, current_user, logout_user, log
 
 app = Flask(__name__)
 
+with app.open_resource('client_secrets.json') as f:
+	CLIENT_ID = json.load(f)['web']['client_id']
+#CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
+#	'web']['client_id']
+APPLICATION_NAME = "Web Developer"
+
+#hashing algorythm
+bcrypt= Bcrypt(app)
+################################################################################
+################################################################################
+# connect to db
+################################################################################
+################################################################################
 engine = create_engine('sqlite:///webdev.db',connect_args={'check_same_thread': False})
 # engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
 Base.metadata.bind = engine
@@ -25,6 +38,11 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+################################################################################
+################################################################################
+# login manager
+################################################################################
+################################################################################
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
@@ -34,14 +52,7 @@ def load_user(user_id):
     return session.query(User).get(user_id)
 
 
-with app.open_resource('client_secrets.json') as f:
-	CLIENT_ID = json.load(f)['web']['client_id']
-#CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
-#	'web']['client_id']
-APPLICATION_NAME = "Web Developer"
 
-#hashing algorythm
-bcrypt= Bcrypt(app)
 ################################################################################
 ################################################################################
 # home
@@ -96,15 +107,16 @@ def login():
 # return "The current session state is %s" % login_session['state']
 	return render_template('login.html', title='Login', form=form)
 
+
 ################################################################################
 ################################################################################
 # settings
 ################################################################################
 ################################################################################
-@app.route("/settings")
+@app.route("/account")
 @login_required
-def settings():
-    pass
+def account():
+    return render_template('account.html', title='account')
 
 
 ################################################################################
