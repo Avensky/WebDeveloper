@@ -5,7 +5,23 @@ from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, User
 
+################################################################################
+################################################################################
+# connect to db
+################################################################################
+################################################################################
+engine = create_engine('sqlite:///webdev.db',connect_args={'check_same_thread': False})
+# engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
 
+
+################################################################################
+################################################################################
+# forms
+################################################################################
+################################################################################
 class RegistrationForm(FlaskForm):
     username = StringField('Username:',
                            validators=[DataRequired(), Length(min=2, max=20)])
