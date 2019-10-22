@@ -5,12 +5,6 @@ from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, User
 
-engine = create_engine('sqlite:///webdev.db')
-#engine = create_engine('postgresql://developer:86developers@localhost/myDatabase')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
-
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username:',

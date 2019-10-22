@@ -3,18 +3,19 @@ import sys
 import datetime
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Text
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
+from flask import Flask
+from flask_login import UserMixin, LoginManager
 
 Base = declarative_base()
 
 
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
     username = Column(String(20), unique=True, nullable=False)
-    name = Column(String(20), unique=True,)
     email = Column(String(120),  unique=True, nullable=False)
     picture = Column(String(20), nullable=False, default='default.jpg')
     password = Column(String(60), nullable=False)
@@ -35,6 +36,7 @@ class User(Base):
 
 class Post(Base):
     __tablename__='post'
+
     id = Column(Integer, primary_key=True)
     title = Column(String(100), nullable=False)
     date_posted = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
@@ -52,49 +54,6 @@ class Post(Base):
             'content': self.content,
             'user_id': self.user_id
         }
-
-class City(Base):
-    __tablename__ = 'city'
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
-
-    @property
-    def serialize(self):
-        """Return object data in easily serializeable format"""
-        return {
-            'name': self.name,
-            'id': self.id,
-            'user_id': self.user_id
-        }
-
-
-class RestaurantItem(Base):
-    __tablename__ = 'restaurant'
-
-    name = Column(String(80), nullable=False)
-    id = Column(Integer, primary_key=True)
-    description = Column(String(250))
-    address = Column(String(250))
-    rating = Column(String(250))
-    city_id = Column(Integer, ForeignKey('city.id'))
-    city = relationship(City)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
-
-    @property
-    def serialize(self):
-        """Return object data in easily serializeable format"""
-        return {
-            'name': self.name,
-            'description': self.description,
-            'id': self.id,
-            'address': self.address,
-            'rating': self.rating,
-        }
-
 engine = create_engine('sqlite:///webdev.db')
 # engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
 
