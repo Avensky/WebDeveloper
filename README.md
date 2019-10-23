@@ -255,3 +255,4 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-ho
 pip install flask-wtf
 pip install sqlalchemy
 pip install flask_bcrypt
+pip3 install pillow

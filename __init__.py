@@ -13,6 +13,7 @@ from oauth2client.client import FlowExchangeError
 import httplib2
 import json
 import secrets
+from PIL import Image
 import os
 from flask import make_response
 import requests
@@ -112,7 +113,7 @@ def login():
 
 ################################################################################
 ################################################################################
-# account
+# picture
 ################################################################################
 ################################################################################
 def save_picture(form_picture):
@@ -121,9 +122,18 @@ def save_picture(form_picture):
 	picture_fn = random_hex + f_ext
 	picture_path = os.path.join(app.root_path, 'static/pics', picture_fn)
 	form_picture.save(picture_path)
-
+	output_size = (125, 125)
+	i = Image.open(form_picture)
+	i.thumbnail(output_size)
+	i.save(picture_path)
 	return picture_fn
 
+
+################################################################################
+################################################################################
+# account
+################################################################################
+################################################################################
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
