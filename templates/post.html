@@ -1,3 +1,5 @@
+{% extends "main.html" %}
+{% block content %}
 <div class="blog-wrapper content-wrapper" id="blog">
 	<div class="box header">
 		<h2>Blog Section</h2>
@@ -5,23 +7,47 @@
 	</div>
 
 	<div class="box content">
-		{% for post in posts %}
 		<div class="blog-card card">
 			<img class="card-img blog-card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
-			<a class="card-title" href="{{ url_for('post', post_id=post.id )}}">{{ post.title }}</a>
-			<h2 class="mr-2" href="#">By {{ post.author.username }}</h2>
+			<h2 class="card-title">{{ post.title }}</h2>
+			<a class="mr-2" href="#">By {{ post.author.username }}</a>
 			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+			{% if post.author == current_user %}
+        <div class="form-card-auth">
+          <a class="registerbtn" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+          <button type="button" class="deletebtn" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        </div>
+      {% endif %}
 			<p class="card-content">{{ post.content }}</p>
 		</div>
-		{% endfor %}
 
-	</div>
-
+		<!-- Modal -->
+		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="registerbtn" data-dismiss="modal">Cancel</button>
+						<form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+							<input class="deletebtn" type="submit" value="Delete">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- modal -->
+	</div><!-- content -->
 	<div class="box sidebar">
 		<div class="side-card card">
 			{% if current_user.is_authenticated %}
 			<a class="card-new-post" href="{{ url_for('new_post') }}">+</a>
 			<p class="card-new-post-title">Add a new post.</p>
+			<!--a class="card-new-post" href="{{ url_for('delete_post', post_id=post.id) }}">-</a>
+			<p class="card-new-post-title">Delete post.</p-->
 			{% endif %}
 			<img class="card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			<p class="card-name">Uriel Zacarias</p>
@@ -44,5 +70,6 @@
 			<p class="card-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 		</div>
 	</div>
-
 </div>
+
+{% endblock %}

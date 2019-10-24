@@ -171,10 +171,10 @@ welcome wrapper
 
 /* blog wrapper */
 .blog-wrapper {
-	grid-template-columns: 25vw;
+	grid-template-columns: 14vw;
 	grid-template-areas:
-		"header  header  header header"
-		"content content content sidebar";
+		"header  header  header header header header header"
+		"content content content content content content sidebar";
 }
 
 /* project wrapper */
@@ -185,22 +185,6 @@ welcome wrapper
 
 /* form wrapper */
 .form-wrapper { }
-
-/* forum wrapper */
-.forum-wrapper{
-	grid-template-columns: 25vw;
-	grid-template-areas:
-		"header  header  header header"
-		"content content content sidebar";
-}
-
-/* forum wrapper */
-.forum-wrapper{
-	grid-template-columns: 25vw;
-	grid-template-areas:
-		"header  header  header header"
-		"content content content sidebar";
-}
 
 /* wrappers for small devices*/
 @media (max-width: 600px) {
@@ -228,6 +212,8 @@ welcome wrapper
 }
 
 .card-name::after {margin-left: 0;}
+.card-new-post { grid-area: new-post; }
+.card-new-post-title { grid-area: post-title; }
 .card-name     { grid-area: name; }
 .card-img      { grid-area: image; }
 .social-list      { grid-area: social; }
@@ -255,26 +241,11 @@ welcome wrapper
 		"social info";
   }
 
-	/* Forum card */
-	.forum-card {
-		grid-template-rows: 1fr;
-		grid-template-columns: 1fr;
-		grid-template-areas:
-			"image title"
-			"image author"
-			"social content"
-	}
 	/* side card */
 .side-card {
-		grid-template-columns: 1fr;
-		grid-template-areas:
-			"image"
-			"name"
-			"position"
-			"title"
-			"archive"
-			"info";
-	}
+	display: flex;
+	text-align: center;
+}
 
 [id^="togList"],                        /* HIDE CHECKBOX */
 [id^="togList"] ~ .list,                /* HIDE LIST */
@@ -332,9 +303,41 @@ hr {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 700;
+	font-size: 1rem;
+	line-height: 1.5;
 }
 
 .registerbtn:hover {
+  opacity:1;
+}
+
+a.registerbtn {
+	text-decoration: none;
+	text-align: center;
+}
+
+a.registerbtn:hover {
+	color:white;
+}
+
+/* Set a style for the submit/register button */
+.deletebtn {
+  background-color: darkred;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.deletebtn:hover {
   opacity:1;
 }
 
@@ -454,6 +457,15 @@ a {
 }
 
 
+a.card-new-post {
+	text-decoration: none;
+}
+
+
+.card-new-post {
+	font-size: 20em;
+	line-height: .55;
+}
 
 
 .card-title {
@@ -518,8 +530,6 @@ footer
 	padding: 20px;
 	text-align: center;
 }
-
-
 
 
 /*******************************************************************************

@@ -35,7 +35,7 @@ class User(Base, UserMixin):
         }
 
 class Post(Base):
-    __tablename__='post'
+    __tablename__= 'post'
 
     id = Column(Integer, primary_key=True)
     title = Column(String(100), nullable=False)
@@ -54,6 +54,7 @@ class Post(Base):
             'content': self.content,
             'user_id': self.user_id
         }
+
 engine = create_engine('sqlite:///webdev.db')
 # engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
 

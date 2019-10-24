@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
-from forms import RegistrationForm, LoginForm, UpdateAccountForm
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort
+from forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from sqlalchemy import create_engine, asc
@@ -55,7 +55,6 @@ def load_user(user_id):
     return session.query(User).get(user_id)
 
 
-
 ################################################################################
 ################################################################################
 # home
@@ -64,6 +63,7 @@ def load_user(user_id):
 @app.route('/')
 @app.route('/home')
 def showHome():
+	posts = session.query(Post).all()
 	return render_template('home.html', posts=posts)
 
 
@@ -165,6 +165,79 @@ def account():
 def logout():
     logout_user()
     return redirect(url_for('showHome'))
+
+
+################################################################################
+################################################################################
+# new posts
+################################################################################
+################################################################################
+@app.route("/post/new", methods=['GET', 'POST'])
+@login_required
+def new_post():
+	form = PostForm()
+	if form.validate_on_submit():
+		post = Post(title=form.title.data, content=form.content.data, author=current_user)
+		session.add(post)
+		session.commit()
+		flash('Your post has been created!', 'success')
+		return redirect(url_for('showHome', _anchor='blog'))
+	return render_template('create_post.html', title='New Post',
+							form=form, legend='New Post')
+
+
+
+################################################################################
+################################################################################
+# post_id
+################################################################################
+################################################################################
+@app.route("/post/<int:post_id>")
+def post(post_id):
+	post = session.query(Post).get(post_id)
+	return render_template('post.html', title=post.title, post=post)
+
+
+################################################################################
+################################################################################
+# post_id update
+################################################################################
+################################################################################
+@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_post(post_id):
+	post = session.query(Post).get(post_id)
+	if post.author != current_user:
+		abort(403)
+	form = PostForm()
+	if form.validate_on_submit():
+		post.title = form.title.data
+		post.content = form.content.data
+		session.commit()
+		flash('Your post has been updated', 'success')
+		return redirect(url_for('post', post_id=post.id))
+	elif request.method == 'GET':
+		form.title.data = post.title
+		form.content.data = post.content
+	return render_template('create_post.html', title='Update Post',
+							form=form, legend='Update Post')
+
+
+################################################################################
+################################################################################
+# post_id delete
+################################################################################
+################################################################################
+@app.route("/post/<int:post_id>/delete", methods=['POST'])
+@login_required
+def delete_post(post_id):
+	post = session.query(Post).get(post_id)
+	if post.author != current_user:
+		abort(403)
+	session.delete(post)
+	session.commit()
+	flash('Your post has been deleted', 'success')
+	return redirect(url_for('showHome', _anchor='blog'))
 
 
 ################################################################################
@@ -398,25 +471,6 @@ def gdisconnect():
         return response
 
 
-################################################################################
-################################################################################
-#
-################################################################################
-################################################################################
-posts = [
-	{
-		'author': 'uriel zacarias',
-		'title': 'blog post 1',
-		'content': 'First sample content',
-		'date_posted': 'December 2, 1990'
-	},
-	{
-		'author': 'uriel zacarias',
-		'title': 'blog post 2',
-		'content': 'Second sample content',
-		'date_posted': 'December 2, 1990'
-	}
-]
 ##############################################################################
 ##############################################################################
 # Disconnect based on provider
