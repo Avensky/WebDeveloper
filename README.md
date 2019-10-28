@@ -256,3 +256,5 @@ pip install flask-wtf
 pip install sqlalchemy
 pip install flask_bcrypt
 pip3 install pillow
+pip3 install Flask-SQLAlchemy
+pip3 install -U flask-paginate

@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort
 from forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, User, Post
@@ -18,7 +17,7 @@ import os
 from flask import make_response
 import requests
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
-
+from flask_paginate import Pagination, get_page_parameter
 app = Flask(__name__)
 
 with app.open_resource('client_secrets.json') as f:
@@ -63,8 +62,29 @@ def load_user(user_id):
 @app.route('/')
 @app.route('/home')
 def showHome():
-	posts = session.query(Post).all()
-	return render_template('home.html', posts=posts)
+	return render_template('home.html')
+
+
+################################################################################
+################################################################################
+# index
+################################################################################
+################################################################################
+@app.route('/blog')
+def showBlog():
+	page = request.args.get(get_page_parameter(), type=int, default=1)
+	per_page = 2
+	# Define total
+	total = session.query(Post).count()
+	# Define how many items are displayed per page
+	start = (page-1)*per_page
+	end = start + per_page
+	#use slices to show how many times are displayed per page
+	posts = session.query(Post).order_by(Post.date_posted.desc()).slice(start, end)
+	pagination = Pagination(page=page, total=total, per_page=per_page,
+							css_framework='bootstrap4',
+							record_name='posts')
+	return render_template('blog.html', posts=posts, page=page, pagination=pagination)
 
 
 ################################################################################
