@@ -2,21 +2,8 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from sqlalchemy import create_engine, asc
-from sqlalchemy.orm import sessionmaker
-from database_setup import Base, User
+from webdev.models import User
 from flask_login import current_user
-
-################################################################################
-################################################################################
-# connect to db
-################################################################################
-################################################################################
-engine = create_engine('sqlite:///webdev.db',connect_args={'check_same_thread': False})
-# engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 
 ################################################################################

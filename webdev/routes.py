@@ -1,57 +1,19 @@
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort
-from forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
-from flask_bcrypt import Bcrypt
-from sqlalchemy import create_engine, asc
-from sqlalchemy.orm import sessionmaker
-from database_setup import Base, User, Post
-from flask import session as login_session
+import os
 import random
 import string
-from oauth2client.client import flow_from_clientsecrets
-from oauth2client.client import FlowExchangeError
-import httplib2
 import json
 import secrets
+import httplib2
 from PIL import Image
-import os
-from flask import make_response
-import requests
-from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort, make_response
+from flask import session as login_session
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
+from flask_login import login_user, current_user, logout_user, login_required
 from flask_paginate import Pagination, get_page_parameter
-app = Flask(__name__)
-
-with app.open_resource('client_secrets.json') as f:
-	CLIENT_ID = json.load(f)['web']['client_id']
-#CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
-#	'web']['client_id']
-APPLICATION_NAME = "Web Developer"
-
-#hashing algorythm
-bcrypt= Bcrypt(app)
-################################################################################
-################################################################################
-# connect to db
-################################################################################
-################################################################################
-engine = create_engine('sqlite:///webdev.db',connect_args={'check_same_thread': False})
-# engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
-
-
-################################################################################
-################################################################################
-# login manager
-################################################################################
-################################################################################
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
-login_manager.login_message_category = 'info'
-
-@login_manager.user_loader
-def load_user(user_id):
-    return session.query(User).get(user_id)
+from webdev import app, db, bcrypt
+from webdev.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
+from webdev.models import User, Post
 
 
 ################################################################################
@@ -75,12 +37,12 @@ def showBlog():
 	page = request.args.get(get_page_parameter(), type=int, default=1)
 	per_page = 2
 	# Define total
-	total = session.query(Post).count()
+	total = Post.query.count()
 	# Define how many items are displayed per page
 	start = (page-1)*per_page
 	end = start + per_page
 	#use slices to show how many times are displayed per page
-	posts = session.query(Post).order_by(Post.date_posted.desc()).slice(start, end)
+	posts = Post.query.order_by(Post.date_posted.desc()).slice(start, end)
 	pagination = Pagination(page=page, total=total, per_page=per_page,
 							css_framework='bootstrap4',
 							record_name='posts')
@@ -98,8 +60,8 @@ def register():
 	if  form.validate_on_submit():
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
-		session.add(user)
-		session.commit()
+		db.session.add(user)
+		db.session.commit()
 		flash(f'Account created for {form.username.data}!', 'success')
 		return redirect(url_for('login'))
 	return render_template('register.html', title='Register', form=form)
@@ -120,7 +82,7 @@ def login():
 	if form.validate_on_submit():
 #		if form.email.data == 'admin@blog.com' and form.password.data == 'password':
 #			flash('You have been logged in!', 'success')
-		user = session.query(User).filter_by(email=form.email.data).first()
+		user = User.query.filter_by(email=form.email.data).first()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			login_user(user)
 			next_page = request.args.get('next')
@@ -164,7 +126,7 @@ def account():
 			current_user.image_file = picture_file
 		current_user.username = form.username.data
 		current_user.email = form.email.data
-		session.commit()
+		db.session.commit()
 		flash('your account has been updated', 'success')
 		return redirect(url_for('account'))
 	elif request.method == 'GET':
@@ -198,8 +160,8 @@ def new_post():
 	form = PostForm()
 	if form.validate_on_submit():
 		post = Post(title=form.title.data, content=form.content.data, author=current_user)
-		session.add(post)
-		session.commit()
+		db.session.add(post)
+		db.session.commit()
 		flash('Your post has been created!', 'success')
 		return redirect(url_for('showHome', _anchor='blog'))
 	return render_template('create_post.html', title='New Post',
@@ -214,7 +176,7 @@ def new_post():
 ################################################################################
 @app.route("/post/<int:post_id>")
 def post(post_id):
-	post = session.query(Post).get(post_id)
+	post = Post.query.get(post_id)
 	return render_template('post.html', title=post.title, post=post)
 
 
@@ -226,14 +188,14 @@ def post(post_id):
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
-	post = session.query(Post).get(post_id)
+	post = Post.query.get(post_id)
 	if post.author != current_user:
 		abort(403)
 	form = PostForm()
 	if form.validate_on_submit():
 		post.title = form.title.data
 		post.content = form.content.data
-		session.commit()
+		db.session.commit()
 		flash('Your post has been updated', 'success')
 		return redirect(url_for('post', post_id=post.id))
 	elif request.method == 'GET':
@@ -251,11 +213,11 @@ def update_post(post_id):
 @app.route("/post/<int:post_id>/delete", methods=['POST'])
 @login_required
 def delete_post(post_id):
-	post = session.query(Post).get(post_id)
+	post = Post.query.get(post_id)
 	if post.author != current_user:
 		abort(403)
-	session.delete(post)
-	session.commit()
+	db.session.delete(post)
+	db.session.commit()
 	flash('Your post has been deleted', 'success')
 	return redirect(url_for('showHome', _anchor='blog'))
 
@@ -445,20 +407,20 @@ def gconnect():
 def createUser(login_session):
     newUser = User(name=login_session['username'], email=login_session[
                    'email'], picture=login_session['picture'])
-    session.add(newUser)
-    session.commit()
-    user = session.query(User).filter_by(email=login_session['email']).one()
+    db.session.add(newUser)
+    db.session.commit()
+    user = User.query.filter_by(email=login_session['email']).one()
     return user.id
 
 
 def getUserInfo(user_id):
-    user = session.query(User).filter_by(id=user_id).one()
+    user = User.query.filter_by(id=user_id).one()
     return user
 
 
 def getUserID(email):
     try:
-        user = session.query(User).filter_by(email=email).one()
+        user = User.query.filter_by(email=email).one()
         return user.id
     except Exception as e:
         return None

@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="blog-wrapper content-wrapper" id="blog">
+	<div class="box header">
+		<h2>Blog Section</h2>
+		<h3>An enthusiast's journey into Web Development</h3>
+	</div>
+	<div class="box content">
+		<div class="blog-card card">
+      {{ pagination.info }}
+      {{ pagination.links }}
+			{% for post in posts %}
+			<img class="blog-card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
+			<a class="card-title" href="{{ url_for('post', post_id=post.id )}}">{{ post.title }}</a>
+			<a class="mr-2" href="#">By {{ post.author.username }}</a>
+			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+			<p class="card-content">{{ post.content }}</p>
+      <!--p>{{ loop.index + pagination.skip}}</p-->
+			{% endfor %}
+			{{ pagination.links }}
+		</div>
+	</div>
+
+	<div class="box sidebar">
+		<div class="side-card card">
+			{% if current_user.is_authenticated %}
+			<a class="card-new-post" href="{{ url_for('new_post') }}">+</a>
+			<p class="card-new-post-title">Add a new post.</p>
+			{% endif %}
+			<img class="card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
+			<p class="card-name">Uriel Zacarias</p>
+			<p class="card-position">Web Developer</p>
+			<h2 class="card-title">Blog Archive</h2>
+			<div class="card-archive">
+			  <input id="togList1" type="checkbox">
+			  <label for="togList1">
+			    <span>Expand</span>
+			    <span>Collapse</span>
+			  </label>
+			  <div class="list">
+			    <ul>
+			      <li>Item 1</li>
+			      <li>Item 2</li>
+			      <li>Item 3</li>
+			    </ul>
+				</div>
+			</div>
+			<p class="card-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</div>
+
+</div>
+{% endblock %}
