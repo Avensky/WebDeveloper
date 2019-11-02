@@ -10,19 +10,16 @@ app = Flask(__name__)
 # engine = create_engine('sqlite:///webdev.db',connect_args={'check_same_thread': False})
 # engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdev.db'
-app.secret_key = 'super_secret_key'
-app.config['SESSION_TYPE'] = 'filesystem'
-app.debug = True
+
 db = SQLAlchemy(app)
+#hashing algorythm
+bcrypt= Bcrypt(app)
 
 with app.open_resource('client_secrets.json') as f:
 	CLIENT_ID = json.load(f)['web']['client_id']
 #CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
 #	'web']['client_id']
 APPLICATION_NAME = "Web Developer"
-
-#hashing algorythm
-bcrypt= Bcrypt(app)
 
 # login manageR
 login_manager = LoginManager(app)

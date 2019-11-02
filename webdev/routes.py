@@ -10,7 +10,6 @@ from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from flask_login import login_user, current_user, logout_user, login_required
-from flask_paginate import Pagination, get_page_parameter
 from webdev import app, db, bcrypt
 from webdev.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from webdev.models import User, Post
@@ -29,24 +28,14 @@ def showHome():
 
 ################################################################################
 ################################################################################
-# index
+# blog
 ################################################################################
 ################################################################################
 @app.route('/blog')
 def showBlog():
-	page = request.args.get(get_page_parameter(), type=int, default=1)
-	per_page = 2
-	# Define total
-	total = Post.query.count()
-	# Define how many items are displayed per page
-	start = (page-1)*per_page
-	end = start + per_page
-	#use slices to show how many times are displayed per page
-	posts = Post.query.order_by(Post.date_posted.desc()).slice(start, end)
-	pagination = Pagination(page=page, total=total, per_page=per_page,
-							css_framework='bootstrap4',
-							record_name='posts')
-	return render_template('blog.html', posts=posts, page=page, pagination=pagination)
+	page = request.args.get('page', type=int, default=1)
+	posts = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5)
+	return render_template('blog.html', posts=posts)
 
 
 ################################################################################
@@ -163,7 +152,7 @@ def new_post():
 		db.session.add(post)
 		db.session.commit()
 		flash('Your post has been created!', 'success')
-		return redirect(url_for('showHome', _anchor='blog'))
+		return redirect(url_for('showBlog'))
 	return render_template('create_post.html', title='New Post',
 							form=form, legend='New Post')
 

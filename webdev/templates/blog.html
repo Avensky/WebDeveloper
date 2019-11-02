@@ -2,22 +2,35 @@
 {% block content %}
 <div class="blog-wrapper content-wrapper" id="blog">
 	<div class="box header">
-		<h2>Blog Section</h2>
+		<a href="{{ url_for('showBlog') }}"><h2>Blog Section</h2></a>
 		<h3>An enthusiast's journey into Web Development</h3>
 	</div>
 	<div class="box content">
 		<div class="blog-card card">
-      {{ pagination.info }}
-      {{ pagination.links }}
-			{% for post in posts %}
+			<ul class="pagination">
+			{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+					{% if page_num %}
+						 {% if posts.page == page_num %}
+							 <li><a class="btn btn-info mb-4" href="{{ url_for('showBlog', page=page_num) }}">{{ page_num }}</a></li>
+						 {% else %}
+							 <li><a class="btn btn-outline-info mb-4" href="{{ url_for('showBlog', page=page_num) }}">{{ page_num }}</a></li>
+						 {% endif %}
+					{% else %}
+						<li>
+							<a class="btn btn-outline-info mb-4">
+		          <span class="ellipsis">&hellip;</span>
+							</a>
+		        </li>
+					{% endif %}
+			{% endfor %}
+			</ul>
+			{% for post in posts.items %}
 			<img class="blog-card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			<a class="card-title" href="{{ url_for('post', post_id=post.id )}}">{{ post.title }}</a>
 			<h2 class="mr-2" href="#">By {{ post.author.username }}</h2>
 			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
 			<p class="card-content">{{ post.content }}</p>
-      <!--p>{{ loop.index + pagination.skip}}</p-->
 			{% endfor %}
-			{{ pagination.links }}
 		</div>
 	</div>
 
