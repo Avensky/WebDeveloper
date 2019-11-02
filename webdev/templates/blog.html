@@ -27,7 +27,7 @@
 			{% for post in posts.items %}
 			<img class="blog-card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			<a class="card-title" href="{{ url_for('post', post_id=post.id )}}">{{ post.title }}</a>
-			<h2 class="mr-2" href="#">By {{ post.author.username }}</h2>
+			<a href="{{ url_for('user_posts', username=post.author.username) }}"><h2 class="mr-2" href="#">By {{ post.author.username }}</h2></a>
 			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
 			<p class="card-content">{{ post.content }}</p>
 			{% endfor %}
