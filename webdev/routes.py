@@ -5,14 +5,29 @@ import json
 import secrets
 import httplib2
 from PIL import Image
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort, make_response
+from flask import (Flask, render_template, request, redirect, jsonify, url_for,
+					flash, abort, make_response)
 from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from flask_login import login_user, current_user, logout_user, login_required
-from webdev import app, db, bcrypt
-from webdev.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
+from flask_mail import Message
+from webdev import app, db, bcrypt, mail
+from webdev.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
+							PostForm, RequestResetForm, ResetPasswordForm)
 from webdev.models import User, Post
+
+
+################################################################################
+################################################################################
+# google json
+################################################################################
+################################################################################
+with app.open_resource('client_secrets.json') as f:
+	CLIENT_ID = json.load(f)['web']['client_id']
+#CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
+#	'web']['client_id']
+APPLICATION_NAME = "Web Developer"
 
 
 ################################################################################
@@ -223,6 +238,64 @@ def delete_post(post_id):
 	db.session.commit()
 	flash('Your post has been deleted', 'success')
 	return redirect(url_for('showHome', _anchor='blog'))
+
+
+################################################################################
+################################################################################
+# send reset email
+################################################################################
+################################################################################
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request',
+					sender='urielzacarias@gmail.com',
+					recipients=[user.email])
+    msg.body = f'''To reset your password, visit the following link:
+{url_for('reset_token', token=token, _external=True)}
+If you did not make this request please ignore this message.
+'''
+    mail.send(msg)
+
+
+################################################################################
+################################################################################
+# reset request
+################################################################################
+################################################################################
+@app.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+	if current_user.is_authenticated:
+		return redirect(url_for('showHome'))
+	form = RequestResetForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(email=form.email.data).first()
+		send_reset_email(user)
+		flash('An email has been sent with instructions to reset your password.', 'info')
+		return redirect(url_for('login'))
+	return render_template('reset_request.html', title='Reset Password', form=form)
+
+
+################################################################################
+################################################################################
+# Reset token
+################################################################################
+################################################################################
+@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+	if current_user.is_authenticated:
+		return redirect(url_for('showHome'))
+	user = User.verify_reset_token(token)
+	if user is None:
+		flash('That is an invalid or expired token', 'warning')
+		return redirect(url_for('reset_request'))
+	form = ResetPasswordForm()
+	if  form.validate_on_submit():
+		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user.password = hashed_password
+		db.session.commit()
+		flash(f'Your password has been updated!', 'success')
+		return redirect(url_for('login'))
+	return render_template('reset_token.html', title='Reset Password', form=form)
 
 
 ################################################################################
