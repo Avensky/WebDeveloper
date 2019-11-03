@@ -7,9 +7,9 @@ from flask_login import LoginManager
 from flask_mail import Mail
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'super_secret_key'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 # engine = create_engine('postgresql://developer:86developers@localhost:5432/myDatabase')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webdev.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
 db = SQLAlchemy(app)
 # hashing algorythm
 bcrypt= Bcrypt(app)
