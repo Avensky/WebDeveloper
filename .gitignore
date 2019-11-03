@@ -1,3 +1,6 @@
 webdev/client_secrets.json
 webdev/fb_client_secrets.json
 instructions.md
+venv/
+*.pyc
+__pycache__/
