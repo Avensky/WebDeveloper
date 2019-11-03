@@ -2,8 +2,17 @@
 {% block content %}
 <div class="blog-wrapper content-wrapper" id="blog">
 	<div class="box header">
-		<a href="{{ url_for('showBlog') }}"><h2>Blog Section</h2></a>
+		<a href="{{ url_for('showBlog') }}"><h2>Blog Section - All Posts</h2></a>
 		<h3>An enthusiast's journey into Web Development</h3>
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<div class="alert alert-{{ category }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
 	</div>
 	<div class="box content">
 		<div class="blog-card card">
@@ -27,7 +36,7 @@
 			{% for post in posts.items %}
 			<img class="blog-card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			<a class="card-title" href="{{ url_for('post', post_id=post.id )}}">{{ post.title }}</a>
-			<a href="{{ url_for('user_posts', username=post.author.username) }}"><h2 class="mr-2" href="#">By {{ post.author.username }}</h2></a>
+			<a href="{{ url_for('user_posts', username=post.author.username) }}">By {{ post.author.username }}</a>
 			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
 			<p class="card-content">{{ post.content }}</p>
 			{% endfor %}

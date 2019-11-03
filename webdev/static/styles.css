@@ -604,6 +604,11 @@ a {
  	font-size: 14px;
  	color: #0093B9;
  	line-height: 17px;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+	color:purple;
 }
 
 .flash {
@@ -615,4 +620,8 @@ a {
 .flash li {
 	list-style-type: none;
 	text-align: center;
+}
+
+.alert {
+	position:inherit;
 }

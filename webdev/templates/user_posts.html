@@ -3,7 +3,7 @@
 <div class="blog-wrapper content-wrapper" id="blog">
 	<div class="box header">
 		<a href="{{ url_for('showBlog') }}"><h2>Blog Section</h2></a>
-		<h3>An enthusiast's journey into Web Development</h3>
+		<h3>Posts by {{ user.username }} ({{ posts.total }})</h3>
 	</div>
 	<div class="box content">
 		<div class="blog-card card">
@@ -11,9 +11,9 @@
 			{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
 					{% if page_num %}
 						 {% if posts.page == page_num %}
-							 <li><a class="btn btn-info mb-4" href="{{ url_for('showBlog', page=page_num) }}">{{ page_num }}</a></li>
+							 <li><a class="btn btn-info mb-4" href="{{ url_for('user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a></li>
 						 {% else %}
-							 <li><a class="btn btn-outline-info mb-4" href="{{ url_for('showBlog', page=page_num) }}">{{ page_num }}</a></li>
+							 <li><a class="btn btn-outline-info mb-4" href="{{ url_for('user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a></li>
 						 {% endif %}
 					{% else %}
 						<li>
@@ -27,7 +27,7 @@
 			{% for post in posts.items %}
 			<img class="blog-card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			<a class="card-title" href="{{ url_for('post', post_id=post.id )}}">{{ post.title }}</a>
-			<a href="{{ url_for('user_posts', username=post.author.username) }}"><h2 class="mr-2" href="#">By {{ post.author.username }}</h2></a>
+			<p>By {{ post.author.username }}</p>
 			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
 			<p class="card-content">{{ post.content }}</p>
 			{% endfor %}
@@ -41,7 +41,7 @@
 			<p class="card-new-post-title">Add a new post.</p>
 			{% endif %}
 			<img class="card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
-			<p class="card-name">Uriel Zacarias</p>
+			<p class="card-name">{{ user.username }}</p>
 			<p class="card-position">Web Developer</p>
 			<h2 class="card-title">Blog Archive</h2>
 			<div class="card-archive">

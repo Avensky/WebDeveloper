@@ -38,12 +38,16 @@ def showBlog():
 	return render_template('blog.html', posts=posts)
 
 
+################################################################################
+################################################################################
+# posts by user
+################################################################################
+################################################################################
 @app.route("/user/<string:username>")
 def user_posts(username):
-    page = request.args.get('page', 1, type=int)
+    page = request.args.get('page', type=int, default=1)
     user = User.query.filter_by(username=username).first_or_404()
-    posts = Post.query.filter_by(author=user)\
-        .order_by(Post.date_posted.desc())\
+    posts = Post.query.filter_by(author=user).order_by(Post.id.desc())\
         .paginate(page=page, per_page=5)
     return render_template('user_posts.html', posts=posts, user=user)
 
@@ -172,10 +176,11 @@ def new_post():
 # post_id
 ################################################################################
 ################################################################################
-@app.route("/post/<int:post_id>")
+@app.route("/post/<int:post_id>", methods=['GET'])
 def post(post_id):
 	post = Post.query.get(post_id)
-	return render_template('post.html', title=post.title, post=post)
+	user = User.query.get(post.user_id)
+	return render_template('post.html', title=post.title, post=post, user=user)
 
 
 ################################################################################

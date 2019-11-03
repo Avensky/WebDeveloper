@@ -2,15 +2,24 @@
 {% block content %}
 <div class="blog-wrapper content-wrapper" id="blog">
 	<div class="box header">
-		<a href="{{ url_for('showBlog') }}"><h2>Blog Section</h2></a>
-		<h3>An enthusiast's journey into Web Development</h3>
+		<a href="{{ url_for('showBlog') }}">
+			<h2>Blog Section
+			</h2>
+		</a>
+		<h3>
+			{% if post.author == current_user %}
+				Edit Post
+			{% else %}
+				View Post
+			{% endif %}
+		</h3>
 	</div>
 
 	<div class="box content">
 		<div class="blog-card card">
 			<img class="card-img blog-card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			<h2 class="card-title">{{ post.title }}</h2>
-			<a class="mr-2" href="#">By {{ post.author.username }}</a>
+			<a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">By {{ post.author.username }}</a>
 			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
 			{% if post.author == current_user %}
         <div class="form-card-auth">
@@ -50,7 +59,7 @@
 			<p class="card-new-post-title">Delete post.</p-->
 			{% endif %}
 			<img class="card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
-			<p class="card-name">Uriel Zacarias</p>
+			<p class="card-name">{{ user.username }}</p>
 			<p class="card-position">Web Developer</p>
 			<h2 class="card-title">Blog Archive</h2>
 			<div class="card-archive">
