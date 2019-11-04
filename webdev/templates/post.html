@@ -22,7 +22,7 @@
 			<a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">By {{ post.author.username }}</a>
 			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
 			{% if post.author == current_user %}
-        <div class="form-card-auth">
+        <div class="center">
           <a class="registerbtn" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
           <button type="button" class="deletebtn" data-toggle="modal" data-target="#deleteModal">Delete</button>
         </div>
