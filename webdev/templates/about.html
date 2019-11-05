@@ -5,17 +5,36 @@
 		<div class="about-card card">
       <img class="card-img" src="{{ url_for('static', filename='pics/blank_user.gif') }}">
       <p class="card-name">about me</p>
-      <p class="card-position">I'm a self taught web developer, hoping for a career change.</p>
+      <p class="card-position">I'm a self taught  web developer</p>
       <p class="card-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <div class="card-row">
-        <a class="card-row-item" href="#"><img class="card-row-img" src="{{ url_for('static', filename='pics/heading.gif') }}"></a>
-        <a class="card-row-item" href="#"><img class="card-row-img" src="{{ url_for('static', filename='pics/heading.gif') }}"></a>
-        <a class="card-row-item" href="#"><img class="card-row-img" src="{{ url_for('static', filename='pics/heading.gif') }}"></a>
-        <a class="card-row-item" href="#"><img class="card-row-img" src="{{ url_for('static', filename='pics/heading.gif') }}"></a>
-      </div>
+        <div class="card-row-item">
+          <iframe class="card-row-vid" src="https://www.youtube.com/embed/xixRXd3YfOU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <a target="_blank" href="https://www.youtube.com/user/Avenskypro/">
+            <h2>YouTube</h2>
+          </a>
+        </div>
+        <div class="card-row-item">
+          <a class="embedly-card" data-card-controls="0" data-card-theme="dark" href="http://avenskypro.blogspot.com/">
+            <h2>Avensky</h2>
+          </a>
+        </div>
+        <div class="card-row-item">
+          <a class="embedly-card" data-card-controls="0" data-card-theme="dark" href="https://www.deviantart.com/avenvedstar/">
+            <h2>avenvedstar | DeviantArt</h2>
+          </a>
+        </div>
+        <div class="card-row-item">
+          <a class="embedly-card" data-card-controls="0" data-card-theme="dark" href="https://github.com/Avensky">
+            <h2>Avensky - Overview</h2>
+          </a>
+        </div>
+      </div><!-- card row -->
       <div class="card-click-here center">
         <a href="{{url_for('showHome')}}#projects"><h3>&#171;projects&#187;</h3></a>
       </div>
     </div>
+
   </div>
 </div>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>

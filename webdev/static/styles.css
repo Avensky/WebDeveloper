@@ -153,15 +153,16 @@ video {
 .card-click-here h3{
 	padding: 6px;
 	border-style:solid;
-	font-size: 6em;
+	font-size: 3em;
 	line-height: 1.05em;
 	border-width:1.5px;
 	border-radius: 20px;
-	border-color: #13149E;
+	border-color: #fff;;
+	background-color:;
 	display: inline-block;
 	color: #fff;
 	color: rgba(255,255,255, 1);
-	text-shadow:  -4px 1px 1px #0093B9;
+
 }
 /*******************************************************************************
 ********************************************************************************
@@ -205,6 +206,7 @@ video {
 
 .navbar-item a {
 	text-decoration: none;
+	color: #0093B9;
 	font-size: 1.25em;
 }
 .navbar-item a:hover {	color: purple;}
@@ -564,15 +566,20 @@ a {
 }
 
 .card-row-item{
-	padding:1%;
+	padding: 0 1%;
   max-width:25%;
-	border-radius: 75%;
 }
+
+.card-row-vid {
+	width: 100%;
+	max-height: 100%;
+ 	background-color: black;
+}
+
 
 .card-row-img{
-  max-width:100%;
+	width:100%;
 }
-
 
 .blog-card-img{
 	justify-self: center;
