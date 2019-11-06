@@ -276,9 +276,13 @@ about-row
 	justify-content: center;
 }
 
+/* wrapper */
+.back-wrapper{
+	background: url('pics/circlelight.png') repeat;
+}
+
 /* content wrapper */
 .content-wrapper {
-	background-image:url('{{ url_for("static", filename="/pics/circlelight.png")}}');
 	min-height: 90vh;
 	margin: 0 15%;
 	padding: 10vh 0 0;
@@ -299,10 +303,10 @@ about-row
 
 /* blog wrapper */
 .blog-wrapper {
-	grid-template-columns: 14vw;
+	grid-template-columns: 4fr 1fr;
 	grid-template-areas:
-		"header  header  header header header header header"
-		"content content content content content content sidebar";
+		"header header"
+		"content sidebar";
 }
 
 
