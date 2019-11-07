@@ -51,24 +51,40 @@
 			<img class="card-img" src="{{ image_file }}">
 			<a class="card-author"><h2>{{ user.username }}</h2></a>
 			<p class="card-position">Web Developer</p>
-			<h2 class="card-title">Blog Archive</h2>
-			<div class="card-archive">
-			  <input id="togList1" type="checkbox">
-			  <label for="togList1">
-			    <span>Expand</span>
-			    <span>Collapse</span>
-			  </label>
-			  <div class="list">
-			    <ul>
-			      <li>Item 1</li>
-			      <li>Item 2</li>
-			      <li>Item 3</li>
-			    </ul>
-				</div>
-			</div>
+			<p class="card-title">Blog Archive</p>
+			<div class="list">
+				<ul>
+					<div class="card-list-item">
+						<input id="togList1" type="checkbox">
+						<label for="togList1">
+							<span><li>2013(23)</li></span>
+							<span><li>2013(23)</li></span>
+						</label>
+						<div class="list">
+							<ul>
+								<div class="card-list-item">
+									<input id="togList11" type="checkbox">
+									<label for="togList11">
+										<span><li>August(2)</li></span>
+										<span><li>August(2)</li></span>
+									</label>
+									<div class="list">
+										<ul>
+											<li>Blog Title</li>
+											<li>Blog Title</li>
+										</ul>
+									</div>
+								</div>
+								<li>July(2)</li>
+								<li>June(2)</li>
+								<li>May(10)</li>
+							</ul>
+						</div>
+					</div><!-- Year Selection -->
+			</div><!--archive -->
 			<p class="card-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		</div>
-	</div>
+		</div><!-- sidecard -->
+	</div><!-- sidebar -->
 
 </div>
 {% endblock %}
