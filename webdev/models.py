@@ -64,5 +64,5 @@ class Post(db.Model):
             'content': self.content,
             'user_id': self.user_id
         }
-        
-db.create_all()
+
+# db.create_all()
