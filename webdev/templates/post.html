@@ -1,26 +1,53 @@
 {% extends "main.html" %}
 {% block content %}
-<div class="blog-wrapper content-wrapper" id="blog">
+<div class="blog-wrapper content-wrapper" id="blog-post">
 	<div class="box header">
-		<a href="{{ url_for('showBlog') }}">
-			<h2>Blog Section
-			</h2>
-		</a>
-		<h3>
-			{% if post.author == current_user %}
-				Edit Post
-			{% else %}
-				View Post
+		<div class="blog-header">
+			<div class="blog-header-left">
+				<a href="{{ url_for('showBlog') }}"><h2>Blog Section</h2></a>
+				<h3>
+					{% if post.author == current_user %}
+						Edit Post
+					{% else %}
+						View Post
+					{% endif %}
+				</h3>
+			</div>
+			<div class="blog-header-right">
+				{% if post.author == current_user %}
+				<div class="blog-header-item ">
+					<a class="card-new-post" href="{{ url_for('delete_post', post_id=post.id) }}">*</a>
+					<p class="card-new-post-title">Edit post</p>
+				</div>
+				<div class="blog-header-item ">
+					<a class="card-new-post" href="{{ url_for('delete_post', post_id=post.id) }}">-</a>
+					<p class="card-new-post-title">Delete post</p>
+				</div>
+				{% endif %}
+				{% if current_user.is_authenticated %}
+				<div class="blog-header-item ">
+					<a class="card-new-post" href="{{ url_for('new_post') }}">+</a>
+					<p class="card-new-post-title">Add a new post</p>
+				</div>
+				{% endif %}
+			</div>
+		</div><!-- header -->
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<div class="alert alert-{{ category }}">
+						{{ message }}
+					</div>
+				{% endfor %}
 			{% endif %}
-		</h3>
-	</div>
-
+		{% endwith %}
+	</div><!-- box-header -->
 	<div class="box content">
 		<div class="blog-card card">
-			<img class="card-img blog-card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
-			<h2 class="card-title">{{ post.title }}</h2>
-			<a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">By {{ post.author.username }}</a>
-			<small class="text-muted"> on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+			<a class="card-post-title"><h1>{{ post.title }}</h1></a>
+			<a class="card-author" href="{{ url_for('user_posts', username=post.author.username) }}"><h2>By {{ post.author.username }}</h2></a>
+			<small class="card-date text-muted"><p> on {{ post.date_posted.strftime('%Y-%m-%d') }}</p></small>
+			<img class="blog-card-img card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			{% if post.author == current_user %}
         <div class="center">
           <a class="registerbtn" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
@@ -29,7 +56,6 @@
       {% endif %}
 			<p class="card-content">{{ post.content }}</p>
 		</div>
-
 		<!-- Modal -->
 		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -50,14 +76,9 @@
 			</div>
 		</div><!-- modal -->
 	</div><!-- content -->
+
 	<div class="box sidebar">
 		<div class="side-card card">
-			{% if current_user.is_authenticated %}
-			<a class="card-new-post" href="{{ url_for('new_post') }}">+</a>
-			<p class="card-new-post-title">Add a new post.</p>
-			<!--a class="card-new-post" href="{{ url_for('delete_post', post_id=post.id) }}">-</a>
-			<p class="card-new-post-title">Delete post.</p-->
-			{% endif %}
 			<img class="card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			<p class="card-name">{{ user.username }}</p>
 			<p class="card-position">Web Developer</p>

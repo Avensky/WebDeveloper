@@ -2,8 +2,20 @@
 {% block content %}
 <div class="content-wrapper" id="">
   <div class="box header">
-  	<a href="{{ url_for('showBlog') }}"><h2>Blog Section</h2></a>
-  	<h3>An enthusiast's journey into Web Development</h3>
+    <div class="blog-header">
+			<div class="blog-header-left">
+				<a href="{{ url_for('showBlog') }}"><h2>Blog Section - Create New Post</h2></a>
+				<h3>An enthusiast's journey into Web Development</h3>
+			</div>
+			<div class="blog-header-right">
+				{% if current_user.is_authenticated %}
+				<div class="blog-header-item ">
+					<a class="card-new-post" href="{{ url_for('showBlog') }}">+</a>
+					<p class="card-new-post-title">Cancel</p>
+				</div>
+				{% endif %}
+			</div>
+		</div><!-- header -->
   </div>
 	<div class="box content center-box">
     <div class= "login-card card">
