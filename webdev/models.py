@@ -70,4 +70,3 @@ class Post(db.Model):
 			'user_id': self.user_id
 		}
 
-#db.create_all()

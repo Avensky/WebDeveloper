@@ -2,6 +2,7 @@ webdev/client_secrets.json
 webdev/fb_client_secrets.json
 webdev/__pycache__/
 instructions.md
+myapp.wsgi
 venv/
 *.pyc
 __pycache__/
