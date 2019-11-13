@@ -1,12 +1,12 @@
 import os
-import random
+import random 
 import string
-import json
-import secrets
-import httplib2
-from PIL import Image
+import json 
+import secrets 
+import httplib2 
+from PIL import Image 
 from flask import (Flask, render_template, request, redirect, jsonify, url_for,
-					flash, abort, make_response)
+			flash, abort, make_response)
 from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
@@ -14,7 +14,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from webdev import app, db, bcrypt, mail
 from webdev.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
-							PostForm, RequestResetForm, ResetPasswordForm)
+				PostForm, RequestResetForm, ResetPasswordForm)
 from webdev.models import User, Post
 
 
@@ -159,11 +159,11 @@ def account():
 # logout
 ################################################################################
 ################################################################################
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('showHome'))
+#@app.route("/logout")
+#@login_required
+#def logout():
+#    logout_user()
+#    return redirect(url_for('showHome'))
 
 
 ################################################################################
@@ -534,22 +534,23 @@ def gdisconnect():
 # Disconnect based on provider
 ##############################################################################
 ##############################################################################
-@app.route('/disconnect')
-def disconnect():
-    if 'provider' in login_session:
-        if login_session['provider'] == 'google':
-            gdisconnect()
-            del login_session['gplus_id']
-            del login_session['access_token']
-        if login_session['provider'] == 'facebook':
-            fbdisconnect()
-            del login_session['facebook_id']
-        del login_session['email']
-        del login_session['picture']
-        del login_session['user_id']
-        del login_session['provider']
-        flash("You have successfully been logged out.")
-        return redirect(url_for('showHome'))
-    else:
-        flash("You were not logged in")
-        return redirect(url_for('showHome'))
+@app.route('/logout')
+def logout():
+	if 'provider' in login_session:
+		if login_session['provider'] == 'google':
+			gdisconnect()
+			del login_session['gplus_id']
+			del login_session['access_token']
+		if login_session['provider'] == 'facebook':
+			fbdisconnect()
+			del login_session['facebook_id']
+		del login_session['email']
+		del login_session['picture']
+		del login_session['user_id']
+		del login_session['provider']
+		flash("You have successfully been logged out.")
+		return redirect(url_for('showHome'))
+	else:
+		flash("You were not logged in")
+		logout_user()
+		return redirect(url_for('showHome'))

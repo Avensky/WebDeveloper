@@ -34,28 +34,31 @@
 			    <li class="navbar-item"><a href="{{url_for('showHome')}}#about">About</a></li>
 			    <li class="navbar-item"><a href="{{url_for('showHome')}}#projects">Projects</a></li>
 			    <li class="navbar-item"><a href="{{url_for('showBlog')}}">Blog</a></li>
-			    <!-- li class="navbar-item">
-			    {% if 'username' not in session %}
-			      <a href="{{url_for('login')}}">Login   </a>
-			      {% else %}
-			      <a href="{{url_for('disconnect')}}">Logout </a>
-			    {% endif %}
-					</li-->
-					{% if current_user.is_authenticated %}
-					<li class="navbar-item">
-						<a href="{{ url_for('account') }}">Account</a>
-					</li>
-					<li class="navbar-item">
-						<a href="{{ url_for('logout') }}">Logout</a>
-					</li>
-					{% else %}
-					<li class="navbar-item">
-						<a href="{{ url_for('register') }}">Register</a>
-					</li>
-					<li class="navbar-item">
-						<a href="{{ url_for('login') }}">Login</a>
-					</li>
-					{% endif %}
+				{% if 'username' not in session %}
+				<li class="navbar-item">		      
+					<a href="{{url_for('login')}}">Login   </a>
+				</li>
+				{% else %}
+				<li class="navbar-item">
+					<a href="{{url_for('disconnect')}}">Logout </a>
+				</li>
+ 				{% endif %}
+				
+				{% if current_user.is_authenticated %}
+				<li class="navbar-item">
+					<a href="{{ url_for('account') }}">Account</a>
+				</li>
+				<li class="navbar-item">
+					<a href="{{ url_for('logout') }}">Logout</a>
+				</li>
+				{% else %}
+				<li class="navbar-item">
+					<a href="{{ url_for('register') }}">Register</a>
+				</li>
+				<li class="navbar-item">
+					<a href="{{ url_for('login') }}">Login</a>
+				</li>
+				{% endif %}
 			  </div>
 			</nav>
 
