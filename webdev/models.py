@@ -12,10 +12,15 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String(20), unique=True, nullable=False)
+	other_id = db.Column(db.String(120), nullable=True)
+	username = db.Column(db.String(20), unique=True, nullable=True)
+	name = db.Column(db.String(100), nullable=True)
+	last_name = db.Column(db.String(100), nullable=True)
 	email = db.Column(db.String(120),  unique=True, nullable=False)
-	image_file = db.Column(db.String(20), nullable=False, default='blank_user.gif')
+	image_file = db.Column(db.String(20), nullable=False, default='pics/blank_user.gif')
 	password = db.Column(db.String(60), nullable=False)
+	active = db.Column(db.Boolean, default=False)
+	tokens = db.Column(db.Text)
 	posts = db.relationship('Post', backref='author', lazy=True)
 
 
@@ -69,4 +74,3 @@ class Post(db.Model):
 			'content': self.content,
 			'user_id': self.user_id
 		}
-
