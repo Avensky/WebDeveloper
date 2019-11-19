@@ -4,6 +4,8 @@ import string
 import json
 import secrets
 import httplib2
+import flask
+import requests
 from PIL import Image
 from flask import (Flask, render_template, request, redirect, jsonify, url_for,
 			flash, abort, make_response)
@@ -16,6 +18,10 @@ from webdev import app, db, bcrypt, mail
 from webdev.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
 				PostForm, RequestResetForm, ResetPasswordForm)
 from webdev.models import User, Post
+import google.oauth2.credentials
+import google_auth_oauthlib.flow
+import googleapiclient.discovery
+from googleapiclient.discovery import build
 
 
 ################################################################################
@@ -23,26 +29,17 @@ from webdev.models import User, Post
 # google json
 ################################################################################
 ################################################################################
-with app.open_resource('client_secrets.json') as f:
-	CLIENT_ID = json.load(f)['web']['client_id']
-with app.open_resource('client_secrets.json') as f:
-	CLIENT_SECRET = json.load(f)['web']['client_secret']
+#with app.open_resource('client_secrets.json') as f:
+#	CLIENT_ID = json.load(f)['web']['client_id']
+#with app.open_resource('client_secrets.json') as f:
+#	CLIENT_SECRET = json.load(f)['web']['client_secret']
 #CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
-APPLICATION_NAME = "Web Developer"
+#APPLICATION_NAME = "Web Developer"
 
-
-################################################################################
-################################################################################
-# home
-################################################################################
-###############################################################################
-import google.oauth2.credentials
-import google_auth_oauthlib.flow
-import googleapiclient.discovery
 
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret.
-CLIENT_SECRETS_FILE = "client_secrets.json"
+CLIENT_SECRETS_FILE = '/vagrant/WebDeveloper/webdev/client_secrets.json'
 
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection.
@@ -93,7 +90,7 @@ def authorize():
   authorization_url, state = flow.authorization_url(
       # Enable offline access so that you can refresh an access token without
       # re-prompting the user for permission. Recommended for web server apps.
-      access_type='offline',
+      access_type='online',
       # Enable incremental authorization. Recommended as a best practice.
       include_granted_scopes='true')
 
@@ -110,7 +107,7 @@ def oauth2callback():
   state = flask.session['state']
 
   flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-      CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
+      CLIENT_SECRETS_FILE, scopes=None, state=state)
   flow.redirect_uri = flask.url_for('oauth2callback', _external=True)
 
   # Use the authorization server's response to fetch the OAuth 2.0 tokens.
@@ -182,6 +179,7 @@ def print_index_table():
           '    After clearing the token, if you <a href="/test">test the ' +
           '    API request</a> again, you should go back to the auth flow.' +
           '</td></tr></table>')
+
 
 @app.route('/home')
 def showHome():
