@@ -6,3 +6,4 @@ myapp.wsgi
 venv/
 *.pyc
 __pycache__/
+webdev.db
