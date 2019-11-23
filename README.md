@@ -2,8 +2,6 @@
 
 ## Important Details
 Domain: https://www.urielzacarias.com
-Server address: 54.200.79.28
-ssh port 2200
 
 Test user login facebook  
 Email:
@@ -63,3 +61,5 @@ https://www.youtube.com/watch?v=Gdys9qPjuKs
 https://certbot.eff.org/  
 https://tecadmin.net/install-apache-mod-wsgi-on-ubuntu-16-04-xenial/  
 https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts
+https://bitwiser.in/2015/09/09/add-google-login-in-flask.html
+https://github.com/realpython/materials/blob/master/flask-google-login/app.pyhttps://developers.google.com/identity/sign-in/web/backend-auth
