@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta name="viewport"  content="width=device-width, initial-scale=1.0" charset="utf">
-		<meta name="google-signin-client_id" content="7173251456-8vjdunpt1ugo70qq3f7na0009qprr9b4.apps.googleusercontent.com">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-		<!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-		<script src="//apis.google.com/js/platform.js?onload=start"></script>
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
-		<!--script src="{{ url_for('static', filename='script.js') }}"></script-->
+		<script src="{{ url_for('static', filename='scripts.js') }}"></script>
 		{% if title %}
 		<title>Uriel Zacarias - {{ title }}</title>
 		{% else %}
@@ -17,8 +11,6 @@
 		{% endif %}
 	</head>
 	<body>
-		<div id="fb-root"></div>
-		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=599583343779617&autoLogAppEvents=1"></script>
 		<div class="wrapper">
 			<div class="video-container">
 				<video src="{{ url_for('static', filename='vids/webdevbak2.mp4') }}" autoplay="true" loop="true"></video>
@@ -34,16 +26,6 @@
 			    <li class="navbar-item"><a href="{{url_for('showHome')}}#about">About</a></li>
 			    <li class="navbar-item"><a href="{{url_for('showHome')}}#projects">Projects</a></li>
 			    <li class="navbar-item"><a href="{{url_for('showBlog')}}">Blog</a></li>
-				{% if 'username' not in session %}
-				<li class="navbar-item">		      
-					<a href="{{url_for('login')}}">Login   </a>
-				</li>
-				{% else %}
-				<li class="navbar-item">
-					<a href="{{url_for('disconnect')}}">Logout </a>
-				</li>
- 				{% endif %}
-				
 				{% if current_user.is_authenticated %}
 				<li class="navbar-item">
 					<a href="{{ url_for('account') }}">Account</a>
@@ -76,14 +58,7 @@
 			<div id="footer"></div>
 		</div>
 
-
-  <!-- script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script -->
-	<!-- script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script -->
-	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script-->
-	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</body>
 </html>

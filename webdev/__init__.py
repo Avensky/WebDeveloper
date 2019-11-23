@@ -17,6 +17,7 @@ bcrypt= Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
+login_manager.session_protection = "strong"
 # Session
 app.config['SESSION_TYPE'] = 'filesystem'
 # EMAIL SETTINGS

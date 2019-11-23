@@ -7,20 +7,17 @@ from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
-	return User.query.get(int(user_id))
+	return User.query.get(user_id)
 
 
 class User(db.Model, UserMixin):
-	id = db.Column(db.Integer, primary_key=True)
-	other_id = db.Column(db.String(120), nullable=True)
-	username = db.Column(db.String(20), unique=True, nullable=True)
-	name = db.Column(db.String(100), nullable=True)
-	last_name = db.Column(db.String(100), nullable=True)
+	id = db.Column(db.String(120), primary_key=True)
+	username = db.Column(db.String(100), nullable=True)
+	given_name = db.Column(db.String(100), nullable=True)
+	family_name = db.Column(db.String(100), nullable=True)
 	email = db.Column(db.String(120),  unique=True, nullable=False)
-	image_file = db.Column(db.String(20), nullable=False, default='pics/blank_user.gif')
-	password = db.Column(db.String(60), nullable=False)
-	active = db.Column(db.Boolean, default=False)
-	tokens = db.Column(db.Text)
+	image_file = db.Column(db.String(20), nullable=False, default='https://urielzacarias.com/static/pics/blank_user.gif')
+	password = db.Column(db.String(60), nullable=True)
 	posts = db.relationship('Post', backref='author', lazy=True)
 
 
@@ -58,7 +55,7 @@ class Post(db.Model):
 	title = db.Column(db.String(100), nullable=False)
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow())
 	content = db.Column(db.Text, nullable=False)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	user_id = db.Column(db.String(120), db.ForeignKey('user.id'), nullable=False)
 
 
 	def __repr__(self):
