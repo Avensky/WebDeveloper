@@ -11,17 +11,15 @@ from webdev.models import User, Post
 from oauthlib.oauth2 import WebApplicationClient
 
 
+
 ################################################################################
 ################################################################################
-# google json
+# handlers
 ################################################################################
 ################################################################################
-with app.open_resource('client_secrets.json') as f:
-	CLIENT_ID = json.load(f)['web']['client_id']
-with app.open_resource('client_secrets.json') as f:
-	CLIENT_SECRET = json.load(f)['web']['client_secret']
-#CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
-APPLICATION_NAME = "Web Developer"
+@login_manager.unauthorized_handler
+def unauthorized():
+	return "You must be logged in to access this content.", 403
 
 ################################################################################
 ################################################################################
@@ -277,18 +275,92 @@ def reset_token(token):
 	return render_template('reset_token.html', title='Reset Password', form=form)
 
 
+################################################################################
+################################################################################
+# Facebook info
+################################################################################
+################################################################################
+with app.open_resource('fb_client_secrets.json') as f:
+	FACEBOOK_APP_ID = json.load(f)['web']['app_id']
+with app.open_resource('fb_client_secrets.json') as f:
+	FACEBOOK_APP_SECRET = json.load(f)['web']['app_secret']
+
 
 ################################################################################
 ################################################################################
-# Google signin
+# Facebook login
 ################################################################################
 ################################################################################
+@app.route("/fbconnect", methods=['POST'])
+def fbconnect():
+	access_token = request.data
+	print ("access token received %s ") % access_token
+
+	url = 'https://graph.facebook.com/oauth/access_token?'
+	url += 'grant_type=fb_exchange_token&client_id=%s' % app_id
+	url += '&client_secret=%s' % app_secret
+	url += '&fb_exchange_token=%s' % access_token
+	h = httplib2.Http()
+	result = h.request(url, 'GET')[1]
+
+	# Use token to get user info from API
+	userinfo_url = "https://graph.facebook.com/v5.0/me"
+	'''
+	    Due to the formatting for the result from the server token exchange we
+	    have to split the token first on commas and select the first index
+	    which gives us the key : value for the server access token then we
+	    split it on colons to pull out the actual token value and replace the
+	    remaining quotes with nothing so that it can be used directly in the
+	    graph api calls
+	'''
+	token = result.split(',')[0].split(':')[1].replace('"', '')
+	url = 'https://graph.facebook.com/v2.8/me?access_token='
+	url += '%s&fields=name,id,email' % token
+	h = httplib2.Http()
+	result = h.request(url, 'GET')[1]
+	# print "url sent for API access:%s"% url
+	# print "API JSON result: %s" % result
+	data = json.loads(result)
+
+	data = request.data
+	unique_id = data['id']
+	user_name = data['name']
+	users_email = data["email"]
+	user = User(
+		social_id=unique_id, username=users_name, email=users_email)
+
+	if not User.query.filter_by(email=users_email).first():
+		newUser = User(
+	        social_id=unique_id, username=users_name, email=users_email)
+		db.session.add(user)
+		db.session.commit()
+	user = User.query.filter_by(email=users_email).first()
+	login_user(user)
+	flash(f'you are now logged in!', 'success')
+	return redirect(next_url)
+
+@app.route('/fbdisconnect')
+def fbdisconnect():
+    facebook_id = login_session['facebook_id']
+    url = 'https://graph.facebook.com/%s/permissions?access_token=%s' % (facebook_id,access_token)
+    h = httplib2.Http()
+    result = h.request(url, 'DELETE')[1]
+    return "you have been logged out"
+
+
+################################################################################
+################################################################################
+# google info
+################################################################################
+################################################################################
+with app.open_resource('client_secrets.json') as f:
+	CLIENT_ID = json.load(f)['web']['client_id']
+with app.open_resource('client_secrets.json') as f:
+	CLIENT_SECRET = json.load(f)['web']['client_secret']
+
+APPLICATION_NAME = "Web Developer"
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration")
-
-@login_manager.unauthorized_handler
-def unauthorized():
-	return "You must be logged in to access this content.", 403
 
 # OAuth2 client setup
 client = WebApplicationClient(CLIENT_ID)
@@ -310,7 +382,7 @@ def gconnect():
 
 ################################################################################
 ################################################################################
-# Google
+# Google signin
 ################################################################################
 ################################################################################
 @app.route("/gconnect/callback")
@@ -362,11 +434,11 @@ def callback():
 	#user = User(id=unique_id, username=users_name, email=users_email, image_file=picture)
 	# see if user exists, if it doesn't make a new one
 	user = User(
-    	id=unique_id, username=users_name, email=users_email, image_file=picture)
+    	social_id=unique_id, username=users_name, email=users_email, image_file=picture)
 
 	if not User.query.filter_by(email=users_email).first():
 		newUser = User(
-	        id=unique_id, username=users_name, email=users_email, image_file=picture)
+	        social_id=unique_id, username=users_name, email=users_email, image_file=picture)
 		db.session.add(user)
 		db.session.commit()
 

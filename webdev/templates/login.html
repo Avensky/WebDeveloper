@@ -11,6 +11,7 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
+    <div id="status"></div>
   </div>
 	<div class="box content center-box">
     <div class= "login-card card">
@@ -70,7 +71,15 @@
     <div class="border-top pt-3"></div>
     <div class="center">
         <!--FABEBOOK SIGN IN -->
-        <button id="signinButton">Sign in with Google</button>
+        <div class="fb-login-button"
+          data-width=""
+          data-size="large"
+          data-button-type="login_with"
+          data-auto-logout-link="false"
+          data-use-continue-as="true"
+          onlogin="checkLoginState();"
+          data-scope="public_profile,email"
+        ></div>
         <!--GOOGLE SIGN IN -->
         <a class="#" href="{{ url_for('gconnect') }}">Google Login</a>
       </div>
