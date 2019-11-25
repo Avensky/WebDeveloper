@@ -82,6 +82,8 @@ def register():
 ################################################################################
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	state = ''.join(random.choice(string.ascii_uppercase + string.digits)
+					for x in range(32))
 	form = LoginForm()
 	if current_user.is_authenticated:
 		return redirect(url_for('showHome'))
@@ -96,7 +98,7 @@ def login():
 		else:
 			flash('Login Unsuccessful. Please check username and password', 'danger')
 # return "The current session state is %s" % login_session['state']
-	return render_template('login.html', title='Login', form=form)
+	return render_template('login.html', title='Login', form=form,  STATE=state)
 
 
 ################################################################################
@@ -280,10 +282,6 @@ def reset_token(token):
 # Facebook info
 ################################################################################
 ################################################################################
-with app.open_resource('fb_client_secrets.json') as f:
-	FACEBOOK_APP_ID = json.load(f)['web']['app_id']
-with app.open_resource('fb_client_secrets.json') as f:
-	FACEBOOK_APP_SECRET = json.load(f)['web']['app_secret']
 
 
 ################################################################################
@@ -293,13 +291,20 @@ with app.open_resource('fb_client_secrets.json') as f:
 ################################################################################
 @app.route("/fbconnect", methods=['POST'])
 def fbconnect():
+	if request.args.get('state') != login_session['state']:
+		response = make_response(json.dumps('Invalid state parameter.'), 401)
+		response.headers['Content-Type'] = 'application/json'
+		return response
 	access_token = request.data
 	print ("access token received %s ") % access_token
 
-	url = 'https://graph.facebook.com/oauth/access_token?'
-	url += 'grant_type=fb_exchange_token&client_id=%s' % app_id
-	url += '&client_secret=%s' % app_secret
-	url += '&fb_exchange_token=%s' % access_token
+	with app.open_resource('fb_client_secrets.json') as f:
+		app_id = json.load(f)['web']['app_id']
+	with app.open_resource('fb_client_secrets.json') as f:
+		app_secret = json.load(f)['web']['app_secret']
+
+	url = 'https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s' % (
+		app_id, app_secret, access_token)
 	h = httplib2.Http()
 	result = h.request(url, 'GET')[1]
 
@@ -326,26 +331,26 @@ def fbconnect():
 	unique_id = data['id']
 	user_name = data['name']
 	users_email = data["email"]
+
+	# Get user picture
+	url = 'https://graph.facebook.com/v2.8/me/picture?access_token=%s&redirect=0&height=200&width=200' % token
+	h = httplib2.Http()
+	result = h.request(url, 'GET')[1]
+	data = json.loads(result)
+	picture = data["data"]["url"]
+
 	user = User(
-		social_id=unique_id, username=users_name, email=users_email)
+		social_id=unique_id, username=users_name, email=users_email, image_file=picture)
 
 	if not User.query.filter_by(email=users_email).first():
 		newUser = User(
-	        social_id=unique_id, username=users_name, email=users_email)
+			social_id=unique_id, username=users_name, email=users_email, image_file=picture)
 		db.session.add(user)
 		db.session.commit()
 	user = User.query.filter_by(email=users_email).first()
 	login_user(user)
 	flash(f'you are now logged in!', 'success')
-	return redirect(next_url)
-
-@app.route('/fbdisconnect')
-def fbdisconnect():
-    facebook_id = login_session['facebook_id']
-    url = 'https://graph.facebook.com/%s/permissions?access_token=%s' % (facebook_id,access_token)
-    h = httplib2.Http()
-    result = h.request(url, 'DELETE')[1]
-    return "you have been logged out"
+	return redirect(url_for('showBlog'))
 
 
 ################################################################################

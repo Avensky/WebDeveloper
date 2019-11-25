@@ -23,8 +23,12 @@ window.fbAsyncInit = function() {
     cookie     : true,                     // Enable cookies to allow the server to access the session.
     status     : true,
     xfbml      : true,                     // Parse social plugins on this webpage.
-    version    : 'v5.0'           // Use this Graph API version for this call.
+    version    : 'v5.0'                    // Use this Graph API version for this call.
   });
+  FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+    statusChangeCallback(response);        // Returns the login status.
+  });
+
 };
 
 
@@ -39,16 +43,34 @@ window.fbAsyncInit = function() {
 
 // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
 function testAPI() {
+  var access_token = FB.getAuthResponse()['accessToken'];
+  console.log(access_token)
   console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function(response) {
     console.log('Successful login for: ' + response.name);
-    document.getElementById('status').innerHTML =
-      'Thanks for logging in, ' + response.name + '!';
+    $.ajax({
+      type: 'POST',
+      url: '/fbconnect?state={{STATE}}',
+      processData: false,
+      data: access_token,
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         setTimeout(function() {
+          window.location.href = "/blog";
+         }, 4000);
+        } else {
+          $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+        }
+      }
+    });
   });
 }
 
-function fblogout(){
+var fblogout = function(){
   FB.logout(function(response) {
-    // user is now logged out
+    // Person is now logged out
   });
 }
