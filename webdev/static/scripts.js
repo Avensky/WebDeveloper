@@ -23,7 +23,7 @@ window.fbAsyncInit = function() {
     cookie     : true,                     // Enable cookies to allow the server to access the session.
     status     : true,
     xfbml      : true,                     // Parse social plugins on this webpage.
-    version    : 'v5.0'                    // Use this Graph API version for this call.
+    version    : 'v2.8'                    // Use this Graph API version for this call.
   });
   FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
     statusChangeCallback(response);        // Returns the login status.
