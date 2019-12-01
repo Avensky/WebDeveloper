@@ -89,12 +89,17 @@ def login():
 #		if form.email.data == 'admin@blog.com' and form.password.data == 'password':
 #			flash('You have been logged in!', 'success')
 		user = User.query.filter_by(email=form.email.data).first()
-		if user and bcrypt.check_password_hash(user.password, form.password.data):
-			login_user(user)
-			next_page = request.args.get('next')
-			return redirect(next_page) if next_page else redirect(url_for('showHome', _anchor='welcome'))
+		password = User.query.filter_by(password=form.password.data).first()
+		if password:
+			if user and bcrypt.check_password_hash(user.password, form.password.data):
+				login_user(user)
+				next_page = request.args.get('next')
+				return redirect(next_page) if next_page else redirect(url_for('showHome', _anchor='welcome'))
+			else:
+				flash('Login Unsuccessful. Please check username and password', 'danger')
 		else:
 			flash('Login Unsuccessful. Please check username and password', 'danger')
+
 # return "The current session state is %s" % login_session['state']
 	return render_template('login.html', title='Login', form=form)
 
@@ -353,7 +358,7 @@ def fbconnect():
 	user = User.query.filter_by(email=users_email).first()
 	login_user(user)
 	flash(f'you are now logged in!', 'success')
-	return redirect(url_for('showBlog'))
+	return redirect(url_for('showBlofg'))
 
 
 ################################################################################
@@ -485,4 +490,4 @@ def getUserID(email):
 def logout():
 	logout_user()
 	flash(f'you are now logged out!', 'success')
-	return redirect(url_for('showBlog'))
+	return redirect(url_for('login'))
