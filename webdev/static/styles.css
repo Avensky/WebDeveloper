@@ -276,6 +276,10 @@ about-row
 	justify-content: center;
 }
 
+.content-section{
+	text-align: center;
+}
+
 /* wrapper */
 .back-wrapper{
 	background: url('pics/circlelight.png') repeat;
@@ -545,6 +549,12 @@ a {
   max-width: 100%;
 	border-radius: 50%;
   border: 2px solid white;
+
+	width: 300px;
+	height: 300px;'
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
 }
 
 
