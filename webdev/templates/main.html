@@ -32,13 +32,12 @@
 			    <li class="navbar-item"><a href="{{url_for('showHome')}}#about">About</a></li>
 			    <li class="navbar-item"><a href="{{url_for('showHome')}}#projects">Projects</a></li>
 			    <li class="navbar-item"><a href="{{url_for('showBlog')}}">Blog</a></li>
-	    		<li class="navbar-item" onclick="fblogout()"><a href="#">fblogout</a></li>
 				{% if current_user.is_authenticated %}
 				<li class="navbar-item">
 					<a href="{{ url_for('account') }}">Account</a>
 				</li>
 				<li class="navbar-item">
-					<a href="{{ url_for('logout') }}">Logout</a>
+					<a href="{{ url_for('logout') }}" onclick="fbLogout()">Logout</a>
 				</li>
 				{% else %}
 				<li class="navbar-item">

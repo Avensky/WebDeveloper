@@ -80,7 +80,9 @@
           data-scope="public_profile,email"
         ></div>
         <!--GOOGLE SIGN IN -->
-        <a class="#" href="{{ url_for('gconnect') }}">Google Login</a>
+        <span class="g-signin2" data-theme="dark" data-onsuccess="onSignIn">
+          <a href="{{ url_for('gconnect') }}"><div class="g-signin2">Google Login</a>
+        </span>
       </div>
     </div>
   </div>

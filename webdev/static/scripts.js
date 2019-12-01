@@ -18,12 +18,30 @@ window.fbAsyncInit = function() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function fbLogout() {
-  FB.logout(function (response) {
-    //Do what ever you want here when logged out like reloading the page 
-    window.location.reload();
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
   });
 }
+
+function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+   console.log('statusChangeCallback');
+   console.log(response);                   // The current login status of the person.
+   if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+     sendTokenToServer();
+   } else {                                 // Not logged into your webpage or we are unable to tell.
+     document.getElementById('status').innerHTML = 'Please log ' +
+       'into this webpage.';
+   }
+ }
+
+function fbLogout() {
+  FB.logout(function(response) {
+    // Person is now logged out
+  });
+}
+
 
 // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
 function sendTokenToServer() {
@@ -34,7 +52,7 @@ function sendTokenToServer() {
     console.log('Successful login for: ' + response.name);
     $.ajax({
       type: 'POST',
-      url: '/fbconnect?state={{STATE}}',
+      url: '/fbconnect',
       processData: false,
       data: access_token,
       contentType: 'application/octet-stream; charset=utf-8',
