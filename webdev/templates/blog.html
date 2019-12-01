@@ -5,7 +5,15 @@
 		<div class="blog-header">
 			<div class="blog-header-left">
 				<a href="{{ url_for('showBlog') }}"><h2>Blog Section - All Posts</h2></a>
-				<h3>An enthusiast's journey into Web Development</h3>
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+						{% for category, message in messages %}
+							<div class="alert alert-{{ category }}">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
 			</div>
 			<div class="blog-header-right">
 				{% if current_user.is_authenticated %}
@@ -16,15 +24,6 @@
 				{% endif %}
 			</div>
 		</div><!-- header -->
-		{% with messages = get_flashed_messages(with_categories=true) %}
-			{% if messages %}
-				{% for category, message in messages %}
-					<div class="alert alert-{{ category }}">
-						{{ message }}
-					</div>
-				{% endfor %}
-			{% endif %}
-		{% endwith %}
 	</div><!-- box-header -->
 	<div class="box content">
 		<div class="blog-card card">
