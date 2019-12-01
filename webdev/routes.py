@@ -358,7 +358,7 @@ def fbconnect():
 	user = User.query.filter_by(email=users_email).first()
 	login_user(user)
 	flash(f'you are now logged in!', 'success')
-	return redirect(url_for('showBlofg'))
+	return redirect(url_for('showBlog'))
 
 
 ################################################################################
