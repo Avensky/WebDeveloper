@@ -18,6 +18,13 @@ window.fbAsyncInit = function() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+function fbLogout() {
+  FB.logout(function (response) {
+    //Do what ever you want here when logged out like reloading the page 
+    window.location.reload();
+  });
+}
+
 // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
 function sendTokenToServer() {
   var access_token = FB.getAuthResponse()['accessToken'];
@@ -43,11 +50,5 @@ function sendTokenToServer() {
         }
       }
     });
-  });
-}
-
-var fblogout = function(){
-  FB.logout(function(response) {
-    // Person is now logged out
   });
 }

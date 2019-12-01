@@ -28,5 +28,6 @@ app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
 app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 
 mail = Mail(app)
+APPLICATION_NAME = "Web Developer"
 
 from webdev import routes
