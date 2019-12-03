@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
 	family_name = db.Column(db.String(100), nullable=True)
 	email = db.Column(db.String(120),  unique=True, nullable=False)
 	image_file = db.Column(db.String(100), nullable=False, default='https://urielzacarias.com/static/pics/blank_user.gif')
-	password = db.Column(db.String(100), nullable=True)
+	password = db.Column(db.String(100), nullable=False)
 	posts = db.relationship('Post', backref='author', lazy=True)
 
 
