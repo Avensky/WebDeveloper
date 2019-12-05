@@ -18,7 +18,9 @@
       <div class="content-section">
           <img class="card-img" src="{{ image_file }}">
           <div class="media-body">
-            <h2 class="account-heading">{{ current_user.username }}</h2>
+            <a class ="card-author" href="{{ url_for('user_posts', username=current_user.username) }}">
+              <h2 class="account-heading">By {{ current_user.username }}</h2>
+            </a>
             <p class="text-secondary">{{ current_user.email }}</p>
           </div>
       </div>

@@ -55,7 +55,7 @@ def user_posts(username):
 	page = request.args.get('page', type=int, default=1)
 	user = User.query.filter_by(username=username).first_or_404()
 	posts = Post.query.filter_by(author=user).order_by(Post.id.desc()).paginate(page=page, per_page=5)
-	image_file = url_for('static',filename='pics/' + user.image_file)
+	image_file = user.image_file
 	return render_template('user_posts.html', posts=posts, user=user, image_file = image_file)
 
 ################################################################################
@@ -173,7 +173,7 @@ def new_post():
 def post(post_id):
 	post = Post.query.get(post_id)
 	user = User.query.get(post.user_id)
-	image_file = url_for('static',filename='pics/' + user.image_file)
+	image_file = user.image_file
 	return render_template('post.html', title=post.title, post=post, user=user, image_file = image_file)
 
 
