@@ -38,7 +38,9 @@
 			</ul>
 			{% for post in posts.items %}
 			<a class="card-post-title" href="{{ url_for('post', post_id=post.id )}}"><h1>{{ post.title }}</h1></a>
-			<a class="card-author" href="{{ url_for('user_posts', username=post.author.username) }}"><h2>By {{ post.author.username }}</h2></a>
+			<a class="card-author" href="{{ url_for('user_posts', username=post.author.username) }}">
+				<h2>By {{ post.author.username }}</h2>
+			</a>
 			<small class="card-date text-muted"><p> on {{ post.date_posted.strftime('%Y-%m-%d') }}</p></small>
 			<img class="blog-card-img card-img" src="{{ url_for('static', filename='pics/heading.gif') }}">
 			<p class="card-content">{{ post.content }}</p>
